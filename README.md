@@ -24,7 +24,7 @@ Built for *Build with AI: Code for Communities (2nd Edition)* — AI & Governanc
 
 | Job | Google AI | Where |
 |---|---|---|
-| Understand voice/text/photo in any Indian language → transcript, translation, category, urgency, location, sentiment, reply in citizen's language — **one multimodal call with a JSON schema** | Gemini 2.5 Flash (structured output) | `app/ai.py · analyse()` |
+| Understand voice/text/photo in any Indian language → transcript, translation, category, urgency, location, sentiment, reply in citizen's language — **one multimodal call with a JSON schema** | Gemini 3.8 Flash (structured output) | `app/ai.py · analyse()` |
 | Merge duplicate reports into issue clusters | Gemini embeddings (`gemini-embedding-001`) | `app/ai.py · embed()`, `app/main.py · _assign_cluster()` |
 | Plain-language analytics for officials | Gemini NL→SQL + answer summarisation | `app/ai.py · nl_to_sql()` |
 | Decision brief per recommended project | Gemini | `app/ai.py · policy_brief()` |

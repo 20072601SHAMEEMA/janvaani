@@ -17,7 +17,7 @@ from pydantic import BaseModel, Field
 from .lang import ACK, CATEGORIES, KEYWORDS, LANGUAGES, URGENT_WORDS, detect_language, template_lookup
 
 API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 EMBED_MODEL = os.environ.get("GEMINI_EMBED_MODEL", "gemini-embedding-001")
 
 _client = None
@@ -25,7 +25,9 @@ if API_KEY:
     try:
         from google import genai
         from google.genai import types
-        _client = genai.Client(api_key=API_KEY)
+        # Set GOOGLE_GENAI_USE_VERTEXAI=true to route through Vertex AI instead of the Gemini Developer API
+        use_vertex = os.environ.get("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true")
+        _client = genai.Client(vertexai=True, api_key=API_KEY) if use_vertex else genai.Client(api_key=API_KEY)
     except Exception as e:  # pragma: no cover
         print("Gemini client unavailable, using offline mode:", e)
 
@@ -34,6 +36,25 @@ _TEMPLATES = template_lookup()
 
 def mode() -> str:
     return "gemini" if _client else "offline"
+
+
+# Backup models tried in order when the primary is overloaded or rate-limited (503/429)
+FALLBACK_MODELS = [m for m in os.environ.get(
+    "GEMINI_FALLBACK_MODELS", "gemini-3.5-flash,gemini-flash-latest,gemini-3.1-flash-lite").split(",") if m]
+
+
+def _generate(contents, config):
+    last = None
+    for model in dict.fromkeys([MODEL, *FALLBACK_MODELS]):
+        try:
+            return _client.models.generate_content(model=model, contents=contents, config=config)
+        except Exception as e:
+            last = e
+            # bad request / auth errors won't be fixed by another model; overload, rate-limit and network errors might
+            if any(str(e).startswith(code) for code in ("400", "401", "403")):
+                raise
+            print(f"{model} unavailable, trying next model")
+    raise last
 
 
 # ---------------------------------------------------------------- analysis
@@ -100,8 +121,8 @@ def _analyse_gemini(text, audio, audio_mime, image, image_mime, state_hint, dist
     if text:
         prompt += f"\nCitizen's typed message:\n\"\"\"{text}\"\"\""
     parts.append(prompt)
-    resp = _client.models.generate_content(
-        model=MODEL, contents=parts,
+    resp = _generate(
+        contents=parts,
         config=types.GenerateContentConfig(response_mime_type="application/json",
                                            response_schema=Analysis, temperature=0.1))
     a = resp.parsed if resp.parsed else Analysis.model_validate_json(resp.text)
@@ -181,8 +202,7 @@ class SQLPlan(BaseModel):
 def nl_to_sql(question: str) -> dict:
     if _client:
         try:
-            resp = _client.models.generate_content(
-                model=MODEL,
+            resp = _generate(
                 contents=f"{SQL_SCHEMA}\nWrite one read-only SQLite query answering the policymaker's question. "
                          f"Use exact state names as stored (e.g. 'Uttar Pradesh'). Prefer aggregated, "
                          f"ranked results with readable column aliases.\nQuestion: {question}",
@@ -222,8 +242,7 @@ def _nl_to_sql_offline(q: str) -> dict:
 def summarise_answer(question: str, rows: list[dict]) -> str:
     if _client and rows:
         try:
-            resp = _client.models.generate_content(
-                model=MODEL,
+            resp = _generate(
                 contents=f"Question from a government policymaker: {question}\nQuery result (JSON): "
                          f"{json.dumps(rows[:50], default=str)}\nAnswer in 2-4 crisp sentences with the key "
                          f"numbers. Do not invent data beyond the result.",
@@ -241,8 +260,7 @@ def summarise_answer(question: str, rows: list[dict]) -> str:
 def policy_brief(ev: dict) -> tuple[str, str]:
     if _client:
         try:
-            resp = _client.models.generate_content(
-                model=MODEL,
+            resp = _generate(
                 contents="You are a policy analyst for a national infrastructure planning cell in India. Using ONLY "
                          "the evidence below, write a concise decision brief in Markdown with sections: "
                          "**Recommendation** (one line, specific project), **Why now** (3 bullets citing the numbers), "
