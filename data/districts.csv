@@ -1,0 +1,45 @@
+district,state,lat,lon,population,aspirational,water,roads,health,education,power,sanitation,digital
+Guntur,Andhra Pradesh,16.31,80.44,4887813,0,72,81,64,70,93,68,58
+Visakhapatnam,Andhra Pradesh,17.69,83.22,4290589,1,61,66,55,62,88,63,52
+Anantapur,Andhra Pradesh,14.68,77.60,4081148,0,58,74,57,64,90,55,49
+Hyderabad,Telangana,17.39,78.49,3943323,0,88,92,78,80,97,74,86
+Nalgonda,Telangana,17.05,79.27,3488809,0,76,78,60,66,94,61,55
+Chennai,Tamil Nadu,13.08,80.27,4646732,0,79,93,82,83,98,70,88
+Madurai,Tamil Nadu,9.93,78.12,3038252,0,74,86,72,76,96,66,70
+Ramanathapuram,Tamil Nadu,9.37,78.83,1353445,1,49,72,58,68,92,52,55
+Bengaluru Urban,Karnataka,12.97,77.59,9621551,0,70,85,80,82,97,69,92
+Raichur,Karnataka,16.21,77.36,1928812,1,52,63,48,55,90,44,45
+Kalaburagi,Karnataka,17.33,76.83,2566326,0,58,68,55,58,91,47,50
+Wayanad,Kerala,11.69,76.13,817420,1,56,70,66,78,95,80,61
+Thiruvananthapuram,Kerala,8.52,76.94,3301427,0,74,88,84,86,99,90,82
+Pune,Maharashtra,18.52,73.86,9429408,0,82,88,80,82,97,76,90
+Nandurbar,Maharashtra,21.37,74.24,1648295,1,44,55,42,50,84,38,36
+Gadchiroli,Maharashtra,20.18,80.00,1072942,1,41,46,39,49,80,40,28
+Ahmedabad,Gujarat,23.02,72.57,7214225,0,90,91,78,80,99,78,88
+Dahod,Gujarat,22.83,74.26,2127086,1,55,64,46,55,92,45,40
+Jaipur,Rajasthan,26.91,75.79,6626178,0,68,84,72,74,94,70,80
+Barmer,Rajasthan,25.75,71.39,2603751,1,31,58,40,52,86,42,38
+Jaisalmer,Rajasthan,26.92,70.91,669919,1,29,52,38,50,84,40,35
+Lucknow,Uttar Pradesh,26.85,80.95,4589838,0,70,86,74,72,92,66,80
+Bahraich,Uttar Pradesh,27.57,81.60,3487731,1,46,57,33,45,76,39,37
+Shravasti,Uttar Pradesh,27.51,82.05,1117361,1,43,52,30,42,74,35,33
+Patna,Bihar,25.59,85.14,5838465,0,64,80,66,66,90,58,74
+Araria,Bihar,26.15,87.47,2811569,1,38,47,35,44,78,30,34
+Kishanganj,Bihar,26.10,87.95,1690400,1,40,49,34,43,79,32,33
+Kolkata,West Bengal,22.57,88.36,4496694,0,80,90,82,80,98,72,89
+Purulia,West Bengal,23.33,86.36,2930115,1,39,60,45,52,85,40,39
+Khordha,Odisha,20.18,85.62,2251673,0,72,82,72,74,94,64,76
+Koraput,Odisha,18.81,82.71,1379647,1,42,50,40,50,82,36,33
+Malkangiri,Odisha,18.35,81.89,613192,1,35,38,31,44,76,30,24
+Ranchi,Jharkhand,23.34,85.31,2914253,1,55,72,60,62,88,52,66
+Pashchimi Singhbhum,Jharkhand,22.57,85.82,1502338,1,33,45,36,46,78,33,30
+Indore,Madhya Pradesh,22.72,75.86,3276697,0,78,88,76,78,96,86,84
+Jhabua,Madhya Pradesh,22.77,74.59,1025048,1,37,56,38,47,85,36,32
+Bastar,Chhattisgarh,19.10,81.95,834873,1,40,50,39,52,83,41,30
+Dantewada,Chhattisgarh,18.90,81.35,283479,1,36,44,37,50,80,38,26
+Kamrup Metropolitan,Assam,26.14,91.74,1253938,0,66,82,74,74,93,65,78
+Dhubri,Assam,26.02,89.98,1949258,1,36,48,34,42,80,31,32
+Ludhiana,Punjab,30.90,75.85,3498739,0,84,90,74,76,97,74,84
+Kupwara,Jammu and Kashmir,34.53,74.26,870354,1,50,54,44,56,82,48,30
+West Garo Hills,Meghalaya,25.57,90.22,643291,1,39,47,41,50,80,44,34
+Chamba,Himachal Pradesh,32.55,76.13,519080,1,62,50,50,66,94,60,40

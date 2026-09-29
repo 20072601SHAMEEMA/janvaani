@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JanVaani — National Priority Dashboard</title>
+<meta name="description" content="Multilingual citizen development requests fused with infrastructure data to recommend priority projects.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="logo">
+    <div class="mark">ज</div>
+    <div><h1>JanVaani</h1><p>Every citizen's voice · every language · one national priority map</p></div>
+  </div>
+  <div class="spacer"></div>
+  <span id="aiBadge" class="badge"><span class="dot"></span><span>AI: …</span></span>
+  <a class="btn-link" href="/submit">Citizen portal →</a>
+</header>
+
+<main>
+  <div class="filters">
+    <select id="fState" aria-label="State"><option value="">All India</option></select>
+    <select id="fCat" aria-label="Category"><option value="">All categories</option></select>
+    <span class="muted small" id="updated"></span>
+  </div>
+
+  <section class="kpis">
+    <div class="card kpi"><div class="v" id="kTotal">–</div><div class="l">Citizen requests</div></div>
+    <div class="card kpi"><div class="v" id="kCitizens">–</div><div class="l">Unique citizens</div></div>
+    <div class="card kpi"><div class="v" id="kLangs">–</div><div class="l">Languages understood</div></div>
+    <div class="card kpi"><div class="v" id="kDistricts">–</div><div class="l">Districts · <span id="kStates">–</span> states</div></div>
+    <div class="card kpi"><div class="v" id="kWeek">–</div><div class="l">New in last 7 days</div></div>
+  </section>
+
+  <section class="grid-main">
+    <div class="card">
+      <div class="card-head"><h2>Demand hotspots</h2><span class="muted small">Circle size = requests · colour = top priority score</span></div>
+      <div id="map"></div>
+      <div class="legend">
+        <span><i style="background:#c2362b"></i>Score ≥ 65</span>
+        <span><i style="background:#e8780c"></i>50–65</span>
+        <span><i style="background:#c9a21a"></i>35–50</span>
+        <span><i style="background:#1f8a5b"></i>&lt; 35</span>
+        <span><i style="background:transparent;border:2px dashed #c2362b"></i>Emerging (surge in 14 days)</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>Recommended priority projects</h2><span class="muted small" id="rankCount"></span></div>
+      <div class="legend" style="margin:0 0 8px">
+        <span><span class="swatch" style="background:var(--c-demand)"></span>Citizen demand</span>
+        <span><span class="swatch" style="background:var(--c-gap)"></span>Infra gap</span>
+        <span><span class="swatch" style="background:var(--c-reach)"></span>Population reach</span>
+        <span><span class="swatch" style="background:var(--c-funding)"></span>Funding gap</span>
+        <span><span class="swatch" style="background:var(--c-equity)"></span>Aspirational</span>
+      </div>
+      <div class="rank-list" id="ranks"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head"><h2>Policy weights</h2><span class="muted small">Each ministry or state can set its own policy mix; the ranking updates instantly</span></div>
+    <div class="weights" id="weights"></div>
+  </section>
+
+  <section class="card" style="margin-top:14px">
+    <div class="card-head"><h2>Ask the data</h2><span class="muted small">Plain-language questions → Gemini → safe read-only SQL</span></div>
+    <form class="ask-row" id="askForm">
+      <input type="text" id="askQ" placeholder="e.g. Which aspirational districts have the most urgent health requests?" aria-label="Question">
+      <button id="askBtn">Ask</button>
+    </form>
+    <div class="examples" id="examples"></div>
+    <div id="askOut"></div>
+  </section>
+
+  <section class="grid-3">
+    <div class="card">
+      <div class="card-head"><h2>Live request feed</h2><span class="muted small">auto-refreshing</span></div>
+      <div class="feed" id="feed"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>By category</h2></div>
+      <div class="bars" id="catBars"></div>
+      <div class="card-head" style="margin-top:18px"><h2>By channel</h2></div>
+      <div class="bars" id="chanBars"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>By language</h2></div>
+      <div class="bars" id="langBars"></div>
+    </div>
+  </section>
+
+  <p class="muted small" style="margin-top:18px">Demo dataset: district populations approximate Census 2011; infrastructure indices and sanctioned-investment
+    figures are illustrative, modelled on public indicators (Jal Jeevan Mission, PMGSY, NFHS, UDISE+). Swap in data.gov.in exports for pilots.
+    Open-source Digital Public Good.</p>
+</main>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer" aria-label="Project detail"></aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="/static/common.js"></script>
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JanVaani — Citizen Portal</title>
+<meta name="description" content="Tell the government what your community needs — by voice or text, in your own language.">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="logo">
+    <div class="mark">ज</div>
+    <div><h1>JanVaani</h1><p>Citizen portal</p></div>
+  </div>
+  <div class="spacer"></div>
+  <span id="aiBadge" class="badge"><span class="dot"></span><span>AI: …</span></span>
+  <a class="btn-link" href="/">Policymaker dashboard →</a>
+</header>
+
+<div class="portal">
+  <div class="hero">
+    <h2>What does your community need?</h2>
+    <div class="scripts">आपकी आवाज़ · మీ గొంతు · உங்கள் குரல் · আপনার কণ্ঠ · તમારો અવાજ · ನಿಮ್ಮ ಧ್ವನಿ</div>
+    <p class="muted">Speak or type in any Indian language. Add a photo if you can. We translate, route and track it.</p>
+  </div>
+
+  <form class="card" id="form">
+    <div class="mic-wrap">
+      <button type="button" class="mic" id="mic" aria-label="Record voice note">🎙️</button>
+      <div>
+        <div id="micStatus"><b>Tap to speak</b> — up to 60 seconds</div>
+        <audio id="playback" controls hidden style="margin-top:6px;max-width:100%"></audio>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <label class="full">Or type your request
+        <textarea id="text" placeholder="e.g. हमारे गाँव में पीने का पानी नहीं है…"></textarea>
+      </label>
+      <label>State
+        <select id="state"><option value="">Auto-detect</option></select>
+      </label>
+      <label>District
+        <select id="district"><option value="">Auto-detect</option></select>
+      </label>
+      <label>Photo (optional)
+        <input type="file" id="photo" accept="image/*" capture="environment">
+      </label>
+      <label>Mobile (optional, stored only as a hash)
+        <input type="tel" id="contact" placeholder="For status updates">
+      </label>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;align-items:center">
+      <button type="submit" id="submitBtn">Submit request</button>
+      <button type="button" class="ghost" id="geoBtn">📍 Use my location</button>
+      <span class="muted small" id="geoStatus"></span>
+    </div>
+    <div class="error" id="err"></div>
+  </form>
+
+  <div id="result"></div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-head"><h2>Try a sample</h2><span class="muted small">for demos</span></div>
+    <div class="samples" id="samples"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-head"><h2>Track a request</h2></div>
+    <form class="ask-row" id="trackForm">
+      <input type="text" id="ticket" placeholder="JV-XXXXXXXX" aria-label="Ticket number">
+      <button>Track</button>
+    </form>
+    <div id="trackOut"></div>
+  </div>
+</div>
+
+<script src="/static/common.js"></script>
+<script src="/static/submit.js"></script>
+</body>
+</html>
