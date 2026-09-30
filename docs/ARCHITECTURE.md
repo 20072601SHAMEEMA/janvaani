@@ -22,7 +22,7 @@ flowchart LR
   end
 
   subgraph Data["Data layer"]
-    REQ[(requests)]
+    REQ[(requests<br/>Cloud Firestore)]
     DIST[(705 districts<br/>NFHS-5 coverage · Census 2011 population)]
   end
 
@@ -65,7 +65,7 @@ Every recommendation shows its parts, and the weights are sliders on the dashboa
 | Concern | Prototype | National deployment |
 |---|---|---|
 | Compute | One Docker container (live on Render free plan; same image runs on Cloud Run) | Cloud Run autoscaling per state/region; Pub/Sub queue between intake and AI analysis |
-| Storage | SQLite (seeded at start) | Firestore for live tickets + **BigQuery** for analytics (same schema; NL→SQL targets BigQuery) |
+| Storage | **Cloud Firestore** keeps every live request; SQLite is a local working copy rebuilt on start | Firestore for tickets + **BigQuery** for analytics (same fields; NL→SQL targets BigQuery) |
 | Geography | All 705 NFHS-5 districts, 34 states/UTs | LGD district codes; Google Maps Platform with India-compliant boundaries |
 | Data | NFHS-5 + Census 2011 (real) | Add data.gov.in feeds: JJM tap connections, PMGSY roads, UDISE+ schools, BharatNet, scheme spend |
 | Languages | Gemini (all major Indian languages) | + Bhashini / Cloud Speech-to-Text for low-resource dialects; Cloud TTS for IVR |

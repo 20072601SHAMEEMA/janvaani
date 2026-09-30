@@ -1,156 +1,179 @@
 # JanVaani: Voice of the People
 
-JanVaani helps government planners decide **where development money is needed most**.
+**Citizens speak. Planners see where help is needed most.**
 
-Citizens report problems like no water, no toilets or no electricity by **voice or text, in their own language**.
-Google Gemini understands each request. JanVaani then combines these requests with **real government data**
-for all 705 districts of India and shows planners a ranked list of projects, with the reasons behind each ranking.
+JanVaani lets people report local problems like no drinking water, no toilets or no electricity by
+**voice, text or photo, in their own language**. Google Gemini understands every request. JanVaani then joins
+those requests with **real government data for all 705 districts of India** and gives planners a ranked list of
+projects, with the reasons behind each ranking.
 
-Built for *Build with AI: Code for Communities (2nd Edition)*, AI & Governance track.
+![Google Gemini](https://img.shields.io/badge/AI-Google%20Gemini-4285F4)
+![Cloud Firestore](https://img.shields.io/badge/Storage-Cloud%20Firestore-FFA000)
+![Districts](https://img.shields.io/badge/Districts-705-1F6F6A)
+![Data](https://img.shields.io/badge/Data-NFHS--5%20%2B%20Census%202011-B4530A)
+![Licence](https://img.shields.io/badge/Licence-MIT-1B2340)
 
-**Live app:** https://janvaani-npik.onrender.com (dashboard) · https://janvaani-npik.onrender.com/submit (citizen portal)
+| | |
+|---|---|
+| **Live dashboard** | https://janvaani-npik.onrender.com |
+| **Citizen portal** | https://janvaani-npik.onrender.com/submit |
+| **Built for** | *Build with AI: Code for Communities (2nd Edition)*, AI & Governance track |
 
-The app is on a free hosting plan, so the first visit after a quiet period can take about a minute to load.
+> The app runs on a free hosting plan, so the first visit after a quiet period can take about a minute to load.
 
-## What you can do with it
+---
+
+## How it works
+
+```mermaid
+flowchart LR
+    A["Citizen<br/>voice · text · photo<br/>any Indian language"] --> B["Google Gemini<br/>transcribe · translate<br/>category · urgency · district"]
+    B --> C["Cloud Firestore<br/>every request saved"]
+    C --> D["Priority score<br/>citizen demand + NFHS-5 gap<br/>+ Census population"]
+    E["Real data<br/>NFHS-5 · Census 2011<br/>705 districts"] --> D
+    D --> F["Planner dashboard<br/>hotspot map · ranking<br/>Gemini briefs · ask the data"]
+    B -. "reply in the citizen's language" .-> A
+```
+
+**One real example from testing:** a citizen said, in Hindi, *"There are no toilets in our village"* and named
+Saran district. Gemini recorded it as sanitation, urgency 4 of 5, in Saran, Bihar, and replied in Hindi with a ticket
+number. NFHS-5 shows only **37.2%** sanitation coverage in Saran, so the project ranks near the top nationally.
+
+## What you can do
 
 **Citizen portal** (`/submit`)
-- Speak or type in any Indian language, including mixed Hindi-English. A photo can be added.
+- Speak, type or add a photo, in any major Indian language, including mixed Hindi-English.
 - Get a ticket number and a reply in your own language, read out loud.
 - See how many other people reported the same problem.
 - Track your request with the ticket number.
 
 **Planner dashboard** (`/`)
-- Map of India showing where requests are coming from.
-- Ranked list of priority projects (district + sector), each with its score explained.
-- Sliders to change what matters more: citizen demand, the data gap, or population.
+- Map of India showing where requests come from, with new surges marked.
+- Ranked priority projects (district + sector), each with its score broken down.
+- Sliders to set what matters most: citizen demand, the data gap, or population.
 - Ask questions in plain English, e.g. *"Which 5 districts have the lowest sanitation coverage?"*
-- One click to get a short policy brief written by Gemini.
+- One click for a short policy brief written by Gemini.
 
-## How Google AI is used
+**Tested with real speech** in Hindi, Telugu, Tamil, Kannada, Malayalam and Bengali, and with text in Odia,
+Punjabi, Assamese, Marathi, Gujarati and mixed Hindi-English.
 
-| What | Google AI |
+## Google technology used
+
+| What it does | Google tool |
 |---|---|
-| Understands voice, text and photos in Indian languages: gives transcript, English translation, category, urgency (1–5), location, and a reply in the citizen's language | Gemini (`gemini-3.8-flash`, with backup models) |
-| Finds duplicate reports of the same problem | Gemini embeddings (`gemini-embedding-001`) |
-| Turns a planner's question into a database query and explains the answer | Gemini |
-| Writes a policy brief for a recommended project | Gemini |
+| Understands voice, text and photos: transcript, English translation, category, urgency (1–5), district, and a reply in the citizen's language | **Gemini API** (`gemini-3.8-flash`, with backup Gemini models) |
+| Groups reports about the same problem | **Gemini embeddings** (`gemini-embedding-001`) |
+| Turns a planner's question into a read-only database query and explains the answer | **Gemini API** |
+| Writes a policy brief for a recommended project | **Gemini API** |
+| Keeps every live citizen request permanently | **Cloud Firestore** (Firebase, free Spark plan) |
+| Calls Gemini from Python | **Google Gen AI SDK** |
+| Recommended hosting for a pilot (Dockerfile and command included) | **Google Cloud Run** |
 
-If Gemini is busy or there is no API key, a simple offline mode keeps the app working.
+If Gemini is busy or no key is set, a simple keyword mode keeps the app working.
 
-## Tools used: Google and others
+### Other open-source tools
 
-The hackathon requires Google AI; the other Google Cloud tools are recommended, not required.
-All Google AI work in JanVaani is done by Gemini. The other tools are free and open source, and are listed here with their licences.
+The hackathon requires Google AI; other tools are allowed when credited. These are all free and open source.
 
-| Tool | Made by | What it does here | Why this one |
-|---|---|---|---|
-| **Gemini API** (`gemini-3.8-flash`, backups) | **Google** | Understands voice, text and photos; answers planners' questions; writes briefs | Required Google AI; handles all major Indian languages |
-| **Gemini embeddings** (`gemini-embedding-001`) | **Google** | Groups duplicate reports | Same Google AI stack |
-| **Google Gen AI SDK** (Apache-2.0) | **Google** | Python library that calls Gemini | Official SDK |
-| **Google Cloud Run** | **Google** | Recommended hosting; `Dockerfile` and deploy command included below | Ready for a government pilot |
-| Render (free plan) | Render | Hosts the live prototype today | Free with no card, deploys from the same `Dockerfile` |
-| FastAPI (MIT), Uvicorn (BSD-3), Pydantic (MIT), python-multipart (Apache-2.0) | Open source | Web server and API | Standard, lightweight Python stack |
-| **Cloud Firestore (Firebase)** | **Google** | Keeps every live citizen request permanently | Survives server restarts; free Spark plan |
-| SQLite | Open source (public domain) | Fast local working copy for ranking and the district data | Rebuilt from Firestore and the data files on every start |
-| Leaflet (BSD-2) + OpenStreetMap tiles (ODbL) | Open source | The hotspot map | Free, no API key; Google Maps Platform can replace it |
-| pyshp (MIT), openpyxl (MIT) | Open source | Only used by `data/build_districts.py` to read the Census files | Not needed to run the app |
+| Tool | Licence | Used for |
+|---|---|---|
+| FastAPI, Uvicorn, Pydantic, python-multipart | MIT, BSD-3, MIT, Apache-2.0 | Web server and API |
+| SQLite | Public domain | Fast local working copy for ranking (rebuilt from Firestore and the data files on every start) |
+| Leaflet + OpenStreetMap tiles | BSD-2, ODbL | The hotspot map |
+| Render (free plan) | Hosting service | Hosts the live prototype from the same Dockerfile |
+| pyshp, openpyxl | MIT | Only in `data/build_districts.py`, to read the Census files |
 
-## Data used
+## Data
 
 | Data | Source | Real? |
 |---|---|---|
-| District coverage: drinking water, sanitation, electricity, institutional births, girls' schooling (705 districts) | **NFHS-5 (2019–21)**, Ministry of Health & Family Welfare / IIPS district fact sheets, via [jvargh7/nfhs5_factsheets](https://github.com/jvargh7/nfhs5_factsheets) (MIT) | ✅ Real |
+| Drinking water, sanitation, electricity, institutional births, girls' schooling (705 districts) | **NFHS-5 (2019–21)**, Ministry of Health & Family Welfare / IIPS district fact sheets, via [jvargh7/nfhs5_factsheets](https://github.com/jvargh7/nfhs5_factsheets) | ✅ Real |
 | District population | **Census 2011** Primary Census Abstract, Registrar General of India | ✅ Real (634 districts; the 71 created after 2011 have no Census figure) |
-| District map points | Census 2011 district boundaries from [datameet/maps](https://github.com/datameet/maps) (MIT); OpenStreetMap for the 71 newer districts | ✅ Real |
-| Citizen requests marked **live** | Submitted through the app | ✅ Real |
-| Citizen requests marked **sample** | Demonstration requests generated by the app | ❌ Sample only |
+| District map points | Census 2011 boundaries from [datameet/maps](https://github.com/datameet/maps); OpenStreetMap for the 71 newer districts | ✅ Real |
+| Requests tagged **live** | Submitted through the app, stored in Firestore | ✅ Real |
+| Requests tagged **sample** | Example requests that fill the dashboard | ❌ Sample only |
 
-**Why are there sample requests?** Real individual complaints are private, so no public dataset exists.
-To show how the dashboard works, the app starts with ~3,900 sample requests. They are not random: each district gets
-more requests about the sectors where its **real NFHS-5 gap** is larger. Every sample request is tagged `sample`
-in the database and on screen.
+The NFHS-5 figures were cross-checked against a second, independent extraction of the same fact sheets:
+**1,675 values identical**.
 
-To rebuild the district data from the original sources:
+**Why sample requests?** Real complaints are private, so no public dataset exists. The app starts with about 3,900
+sample requests so the dashboard is not empty. They follow the real data: each district gets more requests about the
+sectors where its NFHS-5 gap is larger. Every one is tagged `sample` in the database and on screen.
+
+Rebuild the district data from the original sources:
 ```bash
 pip install pyshp openpyxl
 python data/build_districts.py
 ```
 
-## How the priority score works
+## The priority score
 
 ```
 score = 50% Citizen demand + 35% Gap (NFHS-5) + 15% Population (Census 2011)
 ```
 - **Citizen demand**: number of requests, weighted by urgency and how recent they are.
-- **Gap**: 100 minus the district's NFHS-5 coverage for that sector (e.g. 37% sanitation → gap of 63).
-- **Population**: bigger districts benefit more people.
+- **Gap**: 100 minus the district's NFHS-5 coverage (e.g. 37% sanitation gives a gap of 63).
+- **Population**: bigger districts mean more people helped.
 
-Roads and digital connectivity have no NFHS-5 district figure, so those two sectors get no gap points (they can still
-rank high if many people ask for them), and the app shows "no official indicator".
+Every recommendation shows these three parts. Roads and digital connectivity have no NFHS-5 district figure, so they
+get no gap points and are marked "no official indicator"; they can still rank high on citizen demand.
 
 ## Run it on your computer
 
 ```bash
 pip install -r requirements.txt
-cp .env.example .env      # then put your Gemini API key in .env
+cp .env.example .env      # add your Gemini API key
 python -m uvicorn app.main:app --port 8000
 ```
-Open http://localhost:8000 (dashboard) and http://localhost:8000/submit (citizen portal).
+Open http://localhost:8000 and http://localhost:8000/submit. On Windows you can also double-click `run.bat`.
+
+**Connect Firestore (optional):** in the [Firebase console](https://console.firebase.google.com), create a
+Firestore database (region `asia-south1`), then **Project settings → Service accounts → Generate new private key**.
+Save the file as `firebase-key.json` in this folder (git ignores it). `/api/health` then shows
+`"storage": "firestore"`. Without a key the app still works, using SQLite only.
 
 ## Put it online
 
-**Live prototype (Render, free):** `render.yaml` in this repo sets everything up. Open
-https://render.com/deploy?repo=https://github.com/20072601SHAMEEMA/janvaani, log in with GitHub,
-paste a Gemini API key, and click Deploy Blueprint.
+**Render (free, used for the live prototype):** open
+https://render.com/deploy?repo=https://github.com/20072601SHAMEEMA/janvaani, log in with GitHub, and fill in
+`GEMINI_API_KEY` and `FIREBASE_CREDENTIALS` (the full text of the Firebase key file).
 
-**Google Cloud Run (recommended for a pilot):** the same `Dockerfile` runs on Cloud Run. In Google Cloud Shell:
+**Google Cloud Run (recommended for a pilot):** in Google Cloud Shell:
 ```bash
-git clone https://github.com/<your-username>/janvaani.git && cd janvaani
-gcloud run deploy janvaani --source . --region asia-south1 --allow-unauthenticated --max-instances 1 --set-env-vars GEMINI_API_KEY=<your-key>
+git clone https://github.com/20072601SHAMEEMA/janvaani.git && cd janvaani
+gcloud run deploy janvaani --source . --region asia-south1 --allow-unauthenticated --set-env-vars GEMINI_API_KEY=<your-key>
 ```
-`--max-instances 1` keeps all submissions in one place for the prototype (it uses a simple SQLite file).
-For a real pilot, the data would move to Firestore/BigQuery so it can scale.
+Add `FIREBASE_CREDENTIALS` the same way (Secret Manager is best for a real pilot).
 
-## Beyond India (BRICS)
+## Beyond India
 
-Nothing in the app is India-only except the data files. Another country can use it by providing its own district table
-(coverage indicators + population), its language list and its scheme names. Gemini already understands Portuguese,
-Russian, Chinese and the South African languages, so the citizen side works as-is.
-
-## Connect Firebase (Firestore)
-
-1. In the [Firebase console](https://console.firebase.google.com), add Firebase to your Google Cloud project.
-2. **Build → Firestore Database → Create database** (production mode, region `asia-south1`).
-3. **Project settings → Service accounts → Generate new private key.**
-4. On your laptop, save the file as `firebase-key.json` in this folder (it is ignored by git).
-   On the server, add an environment variable `FIREBASE_CREDENTIALS` with the file's full text.
-
-`/api/health` shows `"storage": "firestore"` once connected. Without a key the app uses SQLite only.
+Only the data files are India-specific. Another country, such as a BRICS partner, can use JanVaani by supplying its
+own district table, language list and scheme names. Gemini already understands Portuguese, Russian, Chinese and the
+South African languages.
 
 ## Privacy and safety
 
 - Phone numbers are never stored, only a one-way hash.
-- The "ask a question" feature can only **read** data and cannot see citizens' raw messages or phone hashes.
-- `.env` (the API key) is never committed to git.
+- "Ask the data" can only **read**, and cannot see citizens' raw messages or phone hashes.
+- API keys and the Firebase key live in `.env` / `firebase-key.json`, which are never committed.
 
 ## Folders
 
 ```
-app/      Python backend (FastAPI): main.py, ai.py (Gemini), priority.py (score), db.py (data), lang.py (languages)
-static/   The two web pages: dashboard and citizen portal
-data/     districts.csv (real data) and build_districts.py (rebuilds it from the sources)
-docs/     Architecture, pitch deck outline, demo script, submission text
+app/       main.py (API)   ai.py (Gemini)   store.py (Firestore)   priority.py (score)   db.py (data)   lang.py (languages)
+static/    the dashboard and the citizen portal
+data/      districts.csv (real data) and build_districts.py (rebuilds it from the sources)
+docs/      architecture, pitch deck outline, demo script, submission text
+Dockerfile, render.yaml, run.bat
 ```
 
 ## Credits
 
-- **Google Gemini** and the **Google Gen AI SDK** for all AI features.
-- **NFHS-5 (2019–21)**, Ministry of Health & Family Welfare and IIPS, for district indicators.
-- **Census of India 2011**, Office of the Registrar General, for population.
-- [jvargh7/nfhs5_factsheets](https://github.com/jvargh7/nfhs5_factsheets) (MIT) for the NFHS-5 fact sheets in CSV form.
-- [datameet/maps](https://github.com/datameet/maps) (MIT) for Census 2011 district boundaries.
-- **OpenStreetMap** contributors (ODbL) for map tiles and the locations of districts created after 2011.
-- FastAPI, Uvicorn, Pydantic, python-multipart, Leaflet, pyshp and openpyxl, under the licences listed above.
+- **Google Gemini**, **Cloud Firestore** and the **Google Gen AI SDK**.
+- **NFHS-5 (2019–21)**, Ministry of Health & Family Welfare and IIPS.
+- **Census of India 2011**, Office of the Registrar General.
+- [jvargh7/nfhs5_factsheets](https://github.com/jvargh7/nfhs5_factsheets) (MIT) and [datameet/maps](https://github.com/datameet/maps) (MIT).
+- **OpenStreetMap** contributors (ODbL).
+- FastAPI, Uvicorn, Pydantic, python-multipart, Leaflet, pyshp and openpyxl.
 
-JanVaani's own code is released under the MIT licence (see `LICENSE`).
+JanVaani's code is released under the MIT licence (see `LICENSE`).
