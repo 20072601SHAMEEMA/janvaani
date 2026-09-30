@@ -51,7 +51,8 @@ All Google AI work in JanVaani is done by Gemini. The other tools are free and o
 | **Google Cloud Run** | **Google** | Recommended hosting; `Dockerfile` and deploy command included below | Ready for a government pilot |
 | Render (free plan) | Render | Hosts the live prototype today | Free with no card, deploys from the same `Dockerfile` |
 | FastAPI (MIT), Uvicorn (BSD-3), Pydantic (MIT), python-multipart (Apache-2.0) | Open source | Web server and API | Standard, lightweight Python stack |
-| SQLite | Open source (public domain) | Stores requests in the prototype | No setup; the same tables move to BigQuery/Firestore for a pilot |
+| **Cloud Firestore (Firebase)** | **Google** | Keeps every live citizen request permanently | Survives server restarts; free Spark plan |
+| SQLite | Open source (public domain) | Fast local working copy for ranking and the district data | Rebuilt from Firestore and the data files on every start |
 | Leaflet (BSD-2) + OpenStreetMap tiles (ODbL) | Open source | The hotspot map | Free, no API key; Google Maps Platform can replace it |
 | pyshp (MIT), openpyxl (MIT) | Open source | Only used by `data/build_districts.py` to read the Census files | Not needed to run the app |
 
@@ -116,6 +117,16 @@ For a real pilot, the data would move to Firestore/BigQuery so it can scale.
 Nothing in the app is India-only except the data files. Another country can use it by providing its own district table
 (coverage indicators + population), its language list and its scheme names. Gemini already understands Portuguese,
 Russian, Chinese and the South African languages, so the citizen side works as-is.
+
+## Connect Firebase (Firestore)
+
+1. In the [Firebase console](https://console.firebase.google.com), add Firebase to your Google Cloud project.
+2. **Build → Firestore Database → Create database** (production mode, region `asia-south1`).
+3. **Project settings → Service accounts → Generate new private key.**
+4. On your laptop, save the file as `firebase-key.json` in this folder (it is ignored by git).
+   On the server, add an environment variable `FIREBASE_CREDENTIALS` with the file's full text.
+
+`/api/health` shows `"storage": "firestore"` once connected. Without a key the app uses SQLite only.
 
 ## Privacy and safety
 

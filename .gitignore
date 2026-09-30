@@ -4,3 +4,5 @@ data/*.db
 .env
 .venv/
 data/.cache/
+firebase-key.json
+*-firebase-adminsdk-*.json

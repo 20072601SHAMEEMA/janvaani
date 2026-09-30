@@ -16,6 +16,7 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from . import store
 from .lang import CATEGORIES, STATE_LANGUAGE, TEMPLATES
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -66,6 +67,10 @@ def init_db():
         load_districts(conn)
         add_sample_requests(conn)
     conn.close()
+    store.init()
+    restored = sum(_insert(rec, ignore=True) for rec in store.load_all())
+    if store.enabled():
+        print(f"Loaded {restored} live requests from Firestore")
 
 
 def load_districts(conn):
@@ -154,15 +159,26 @@ def rows(sql: str, params=()) -> list[dict]:
         conn.close()
 
 
-def insert_request(rec: dict):
-    cols = ["id", "created_at", "channel", "citizen_hash", "original_text", "language", "translation",
-            "category", "urgency", "summary", "location_text", "state", "district", "lat", "lon",
-            "sentiment", "has_photo", "photo_note", "status", "cluster_id", "embedding", "ai_mode"]
+REQUEST_COLS = ["id", "created_at", "channel", "citizen_hash", "original_text", "language", "translation",
+                "category", "urgency", "summary", "location_text", "state", "district", "lat", "lon",
+                "sentiment", "has_photo", "photo_note", "status", "cluster_id", "embedding", "ai_mode"]
+
+
+def _insert(rec: dict, ignore: bool = False) -> int:
+    """Write one request to SQLite. Returns 1 if a new row was added."""
+    values = [json.dumps(rec[c]) if c == "embedding" and isinstance(rec.get(c), list) else rec.get(c)
+              for c in REQUEST_COLS]
     conn = connect()
     try:
-        conn.execute(f"INSERT INTO requests ({','.join(cols)}) VALUES ({','.join('?' * len(cols))})",
-                     [json.dumps(rec[c]) if c == "embedding" and rec.get(c) is not None else rec.get(c)
-                      for c in cols])
+        cur = conn.execute(f"INSERT {'OR IGNORE ' if ignore else ''}INTO requests ({','.join(REQUEST_COLS)}) "
+                           f"VALUES ({','.join('?' * len(REQUEST_COLS))})", values)
         conn.commit()
+        return cur.rowcount
     finally:
         conn.close()
+
+
+def insert_request(rec: dict):
+    """A new live request: saved locally for ranking and in Firestore so it is never lost."""
+    _insert(rec)
+    store.save({c: rec.get(c) for c in REQUEST_COLS})

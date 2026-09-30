@@ -14,7 +14,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
-from . import ai, db, priority
+from . import ai, db, priority, store
 from .lang import CATEGORIES, LANGUAGES
 
 app = FastAPI(title="JanVaani", description="Multilingual citizen development-request platform (Digital Public Good)")
@@ -41,7 +41,8 @@ def submit_page():
 
 @app.get("/api/health")
 def health():
-    return {"ok": True, "ai_mode": ai.mode(), "model": ai.MODEL if ai.mode() == "gemini" else None}
+    return {"ok": True, "ai_mode": ai.mode(), "model": ai.MODEL if ai.mode() == "gemini" else None,
+            "storage": "firestore" if store.enabled() else "sqlite"}
 
 
 @app.get("/api/meta")
