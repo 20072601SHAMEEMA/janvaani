@@ -38,6 +38,23 @@ The app is on a free hosting plan, so the first visit after a quiet period can t
 
 If Gemini is busy or there is no API key, a simple offline mode keeps the app working.
 
+## Tools used: Google and others
+
+The hackathon requires Google AI; the other Google Cloud tools are recommended, not required.
+All Google AI work in JanVaani is done by Gemini. The other tools are free and open source, and are listed here with their licences.
+
+| Tool | Made by | What it does here | Why this one |
+|---|---|---|---|
+| **Gemini API** (`gemini-3.8-flash`, backups) | **Google** | Understands voice, text and photos; answers planners' questions; writes briefs | Required Google AI; handles all major Indian languages |
+| **Gemini embeddings** (`gemini-embedding-001`) | **Google** | Groups duplicate reports | Same Google AI stack |
+| **Google Gen AI SDK** (Apache-2.0) | **Google** | Python library that calls Gemini | Official SDK |
+| **Google Cloud Run** | **Google** | Recommended hosting; `Dockerfile` and deploy command included below | Ready for a government pilot |
+| Render (free plan) | Render | Hosts the live prototype today | Free with no card, deploys from the same `Dockerfile` |
+| FastAPI (MIT), Uvicorn (BSD-3), Pydantic (MIT), python-multipart (Apache-2.0) | Open source | Web server and API | Standard, lightweight Python stack |
+| SQLite | Open source (public domain) | Stores requests in the prototype | No setup; the same tables move to BigQuery/Firestore for a pilot |
+| Leaflet (BSD-2) + OpenStreetMap tiles (ODbL) | Open source | The hotspot map | Free, no API key; Google Maps Platform can replace it |
+| pyshp (MIT), openpyxl (MIT) | Open source | Only used by `data/build_districts.py` to read the Census files | Not needed to run the app |
+
 ## Data used
 
 | Data | Source | Real? |
@@ -80,9 +97,13 @@ python -m uvicorn app.main:app --port 8000
 ```
 Open http://localhost:8000 (dashboard) and http://localhost:8000/submit (citizen portal).
 
-## Put it online (Google Cloud Run)
+## Put it online
 
-In Google Cloud Shell:
+**Live prototype (Render, free):** `render.yaml` in this repo sets everything up. Open
+https://render.com/deploy?repo=https://github.com/20072601SHAMEEMA/janvaani, log in with GitHub,
+paste a Gemini API key, and click Deploy Blueprint.
+
+**Google Cloud Run (recommended for a pilot):** the same `Dockerfile` runs on Cloud Run. In Google Cloud Shell:
 ```bash
 git clone https://github.com/<your-username>/janvaani.git && cd janvaani
 gcloud run deploy janvaani --source . --region asia-south1 --allow-unauthenticated --max-instances 1 --set-env-vars GEMINI_API_KEY=<your-key>
@@ -113,5 +134,12 @@ docs/     Architecture, pitch deck outline, demo script, submission text
 
 ## Credits
 
-FastAPI, Google Gen AI SDK, Leaflet, OpenStreetMap, NFHS-5 (MoHFW/IIPS), Census of India 2011, datameet, jvargh7/nfhs5_factsheets.
-MIT licence.
+- **Google Gemini** and the **Google Gen AI SDK** for all AI features.
+- **NFHS-5 (2019–21)**, Ministry of Health & Family Welfare and IIPS, for district indicators.
+- **Census of India 2011**, Office of the Registrar General, for population.
+- [jvargh7/nfhs5_factsheets](https://github.com/jvargh7/nfhs5_factsheets) (MIT) for the NFHS-5 fact sheets in CSV form.
+- [datameet/maps](https://github.com/datameet/maps) (MIT) for Census 2011 district boundaries.
+- **OpenStreetMap** contributors (ODbL) for map tiles and the locations of districts created after 2011.
+- FastAPI, Uvicorn, Pydantic, python-multipart, Leaflet, pyshp and openpyxl, under the licences listed above.
+
+JanVaani's own code is released under the MIT licence (see `LICENSE`).

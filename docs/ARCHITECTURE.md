@@ -11,7 +11,7 @@ flowchart LR
     IVR[IVR / missed-call<br/><i>roadmap</i>]
   end
 
-  subgraph Run["Cloud Run · FastAPI (stateless, autoscaling)"]
+  subgraph Run["FastAPI in one Docker container (Cloud Run-ready; prototype live on Render)"]
     I[/api/requests intake/]
     G1[Gemini multimodal<br/>transcribe · translate · classify<br/>urgency · location · reply]
     E[Gemini embeddings<br/>duplicate clustering]
@@ -64,7 +64,7 @@ Every recommendation shows its parts, and the weights are sliders on the dashboa
 
 | Concern | Prototype | National deployment |
 |---|---|---|
-| Compute | 1 Cloud Run service | Cloud Run autoscaling per state/region; Pub/Sub queue between intake and AI analysis |
+| Compute | One Docker container (live on Render free plan; same image runs on Cloud Run) | Cloud Run autoscaling per state/region; Pub/Sub queue between intake and AI analysis |
 | Storage | SQLite (seeded at start) | Firestore for live tickets + **BigQuery** for analytics (same schema; NL→SQL targets BigQuery) |
 | Geography | All 705 NFHS-5 districts, 34 states/UTs | LGD district codes; Google Maps Platform with India-compliant boundaries |
 | Data | NFHS-5 + Census 2011 (real) | Add data.gov.in feeds: JJM tap connections, PMGSY roads, UDISE+ schools, BharatNet, scheme spend |
