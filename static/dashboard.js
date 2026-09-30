@@ -1,10 +1,10 @@
-const COMP_COLORS = { demand: "var(--c-demand)", gap: "var(--c-gap)", reach: "var(--c-reach)", funding: "var(--c-funding)", equity: "var(--c-equity)" };
-const COMP_LABELS = { demand: "Citizen demand", gap: "Infra gap", reach: "Population reach", funding: "Funding gap", equity: "Aspirational" };
+const COMP_COLORS = { demand: "var(--c-demand)", gap: "var(--c-gap)", reach: "var(--c-reach)" };
+const COMP_LABELS = { demand: "Citizen demand", gap: "Gap (NFHS-5)", reach: "Population (Census 2011)" };
 const EXAMPLES = [
-  "Which districts in Bihar need water projects most?",
-  "Top 5 districts by urgent health requests (urgency 4 or 5)",
+  "Which 10 districts have the lowest sanitation coverage?",
+  "Which districts in Bihar have the most urgent requests?",
   "How many requests came in each language?",
-  "Which aspirational districts have the lowest road coverage but high demand?",
+  "Compare average electricity coverage by state",
 ];
 
 let META, map, layer, weights = {}, lastFeedTop = null;
@@ -63,6 +63,7 @@ async function refreshStats() {
   $("kTotal").textContent = fmt(s.total); $("kCitizens").textContent = fmt(s.citizens);
   $("kLangs").textContent = s.languages; $("kDistricts").textContent = s.districts;
   $("kStates").textContent = s.states; $("kWeek").textContent = fmt(s.last7);
+  $("kLive").textContent = fmt(s.live);
   bars("catBars", s.by_category.map((r) => [catLabel(r.category), r.n]));
   bars("langBars", s.by_language.map((r) => [`${langName(r.language)} · ${META.languages[r.language]?.native || ""}`, r.n]));
   bars("chanBars", s.by_channel.map((r) => [r.channel, r.n]));
@@ -81,8 +82,8 @@ async function refreshRanking(fit) {
     <button class="rank" data-d="${esc(r.district)}" data-c="${r.category}">
       <span class="n">${r.rank}</span>
       <span><span class="t">${esc(r.district)}</span> <span class="muted small">${esc(r.state)}</span>
-        <span class="chip">${esc(r.category_label)}</span>${r.emerging ? '<span class="chip hot">▲ emerging</span>' : ""}${r.aspirational ? '<span class="chip asp">aspirational</span>' : ""}
-        <div class="muted small">${r.requests} requests · ${r.distinct_issues} issues · coverage ${Math.round(r.indicator_pct)}%</div>
+        <span class="chip">${esc(r.category_label)}</span>${r.emerging ? '<span class="chip hot">▲ emerging</span>' : ""}
+        <div class="muted small">${r.requests} requests · ${r.distinct_issues} issues · ${r.coverage_pct != null ? `coverage ${Math.round(r.coverage_pct)}%` : "no official indicator"}</div>
         <div class="stack">${Object.entries(r.contributions).map(([k, v]) => `<span title="${COMP_LABELS[k]}: ${v}" style="width:${v}%;background:${COMP_COLORS[k]}"></span>`).join("")}</div>
       </span>
       <span class="s" style="color:${scoreColor(r.score)}">${r.score}</span>
@@ -111,7 +112,7 @@ async function refreshFeed() {
     <div class="feed-item ${lastFeedTop && r.id === top && top !== lastFeedTop ? "new-flash" : ""}">
       <div class="orig">${esc(r.original_text)}</div>
       ${r.language !== "en" ? `<div class="tr">${esc(r.translation)}</div>` : ""}
-      <div class="meta"><span class="chip">${esc(langName(r.language))}</span><span class="chip">${esc(catLabel(r.category))}</span>
+      <div class="meta">${r.ai_mode === "sample" ? '<span class="chip">sample</span>' : '<span class="chip hot">live</span>'}<span class="chip">${esc(langName(r.language))}</span><span class="chip">${esc(catLabel(r.category))}</span>
         <span class="urg urg-${r.urgency}">urgency ${r.urgency}/5</span><span>${esc(r.district || "unmapped")}</span>
         <span>· ${esc(r.channel)}</span><span>· ${ago(r.created_at)}</span>${r.ai_mode === "gemini" ? "<span>· ✦ Gemini</span>" : ""}</div>
     </div>`).join("");
@@ -144,16 +145,16 @@ async function openProject(district, category) {
     <button class="ghost close" onclick="closeDrawer()" aria-label="Close">✕</button>
     <div class="muted small">National rank #${p.rank} · ${esc(p.scheme)}</div>
     <h2 style="font-size:21px;margin:4px 0">${esc(p.category_label)} — ${esc(p.district)}, ${esc(p.state)}</h2>
-    <div>${p.emerging ? '<span class="chip hot">▲ emerging</span>' : ""}${p.aspirational ? '<span class="chip asp">aspirational district</span>' : ""}</div>
+    <div>${p.emerging ? '<span class="chip hot">▲ emerging</span>' : ""}</div>
     <div style="display:flex;align-items:baseline;gap:10px;margin-top:10px"><span style="font-size:40px;font-weight:800;color:${scoreColor(p.score)}">${p.score}</span><span class="muted">priority score / 100</span></div>
     <div class="comp-grid">${Object.entries(p.contributions).map(([k, v]) => `<div class="comp" style="border-top:3px solid ${COMP_COLORS[k]}"><div class="v">${v}</div><div class="l">${COMP_LABELS[k]}</div></div>`).join("")}</div>
     <div class="kv">
       <div>Citizen requests</div><div><b>${p.requests}</b> from ${p.unique_citizens} citizens · ${p.distinct_issues} distinct issues</div>
       <div>Trend</div><div>${p.trend.last14} in last 14 days vs ${p.trend.prev14} in prior 14</div>
       <div>Avg urgency</div><div>${p.avg_urgency} / 5</div>
-      <div>Coverage indicator</div><div>${Math.round(p.indicator_pct)}% (gap ${Math.round(100 - p.indicator_pct)} pts)</div>
-      <div>Population</div><div>${fmt(p.population)} · ~${fmt(p.est_underserved)} underserved</div>
-      <div>Already sanctioned</div><div>₹${p.sanctioned_cr} cr under ${esc(p.scheme)}</div>
+      <div>Official data (NFHS-5)</div><div>${p.coverage_pct != null ? `<b>${p.coverage_pct}%</b> — ${esc(p.indicator)}` : "No NFHS-5 indicator for this sector"}</div>
+      <div>Population (Census 2011)</div><div>${p.population_2011 ? fmt(p.population_2011) : "n/a — district created after 2011"}${p.people_without ? ` · ~${fmt(p.people_without)} people without this service` : ""}</div>
+      <div>Scheme</div><div>${esc(p.scheme)}</div>
       <div>Languages</div><div>${d.languages.map((l) => `${esc(langName(l.language))} (${l.n})`).join(", ")}</div>
     </div>
     <h3 style="margin-top:18px;font-size:14px">AI policy brief</h3>
@@ -164,7 +165,7 @@ async function openProject(district, category) {
     <h3 style="margin-top:18px;font-size:14px">What citizens said</h3>
     <div class="feed" style="max-height:none">${d.samples.map((s) => `<div class="feed-item"><div class="orig">${esc(s.original_text)}</div>
       ${s.language !== "en" ? `<div class="tr">${esc(s.translation)}</div>` : ""}
-      <div class="meta"><span class="chip">${esc(langName(s.language))}</span><span class="urg urg-${s.urgency}">urgency ${s.urgency}</span><span>${esc(s.location_text || "")}</span><span>· ${esc(s.id)}</span></div></div>`).join("")}</div>`;
+      <div class="meta">${s.ai_mode === "sample" ? '<span class="chip">sample</span>' : '<span class="chip hot">live</span>'}<span class="chip">${esc(langName(s.language))}</span><span class="urg urg-${s.urgency}">urgency ${s.urgency}</span><span>${esc(s.location_text || "")}</span><span>· ${esc(s.id)}</span></div></div>`).join("")}</div>`;
   $("briefBtn").onclick = async () => {
     $("briefBtn").disabled = true; $("briefBtn").innerHTML = '<span class="spinner"></span> Writing brief…';
     try {

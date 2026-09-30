@@ -184,13 +184,15 @@ def jaccard(a: str, b: str) -> float:
 
 # ---------------------------------------------------------------- ask the data
 SQL_SCHEMA = """SQLite tables:
-districts(district TEXT, state TEXT, lat REAL, lon REAL, population INT, aspirational INT 0/1,
-          water REAL, roads REAL, health REAL, education REAL, power REAL, sanitation REAL, digital REAL)
-          -- the category columns are % coverage/access (higher = better served)
-investments(district TEXT, category TEXT, scheme TEXT, sanctioned_cr REAL)  -- INR crore already sanctioned
+districts(district TEXT, state TEXT, lat REAL, lon REAL, population_2011 INT (Census 2011; NULL if created after 2011),
+          water REAL, sanitation REAL, power REAL, health REAL, education REAL, note TEXT)
+          -- real NFHS-5 (2019-21) % coverage, higher = better served:
+          -- water = improved drinking-water source, sanitation = improved sanitation facility,
+          -- power = households with electricity, health = institutional births, education = females 6+ ever in school
 requests(id TEXT, created_at TEXT ISO8601, channel TEXT, language TEXT (ISO code e.g. hi, te, ta),
          translation TEXT (English), category TEXT one of water|roads|health|education|power|sanitation|digital|other,
-         urgency INT 1-5, summary TEXT, state TEXT, district TEXT, status TEXT)
+         urgency INT 1-5, summary TEXT, state TEXT, district TEXT, status TEXT,
+         ai_mode TEXT ('sample' = starting sample data, 'gemini'/'offline' = live submission))
 """
 
 
@@ -231,7 +233,7 @@ def _nl_to_sql_offline(q: str) -> dict:
                + (" WHERE " + " AND ".join(where) if where else "") + " GROUP BY language ORDER BY requests DESC")
         return {"sql": sql, "explanation": "Requests by language."}
     sql = ("SELECT r.district, r.state, COUNT(*) AS requests, ROUND(AVG(r.urgency),2) AS avg_urgency"
-           + (f", d.{cat} AS coverage_pct" if cat else "")
+           + (f", d.{cat} AS nfhs5_coverage_pct" if cat and CATEGORIES[cat][2] else "")
            + " FROM requests r JOIN districts d ON d.district = r.district"
            + (" WHERE " + " AND ".join(where) if where else "")
            + " GROUP BY r.district ORDER BY requests DESC LIMIT 10")
@@ -277,16 +279,22 @@ def policy_brief(ev: dict) -> tuple[str, str]:
 def _brief_offline(ev: dict) -> str:
     p = ev["priority"]
     quotes = "\n".join(f"- “{q}”" for q in list(dict.fromkeys(ev["sample_requests_en"]))[:2])
+    if p["coverage_pct"] is not None:
+        gap_line = f"- NFHS-5: only {p['coverage_pct']:.0f}% coverage ({p['indicator'].lower()})."
+    else:
+        gap_line = "- No official district indicator for this sector yet; ranked on citizen demand and population."
+    reach = (f"~{p['people_without']:,} people without this service (Census 2011 population x NFHS-5 gap)."
+             if p["people_without"] else "Population figure not available (district created after 2011).")
     return (
-        f"**Recommendation:** Sanction a {p['category_label'].lower()} project in **{p['district']}, {p['state']}** "
+        f"**Recommendation:** Take up a {p['category_label'].lower()} project in **{p['district']}, {p['state']}** "
         f"under {p['scheme']}.\n\n"
         f"**Why now**\n"
         f"- {p['requests']} requests from {p['unique_citizens']} citizens ({p['distinct_issues']} distinct issues), "
-        f"avg urgency {p['avg_urgency']}/5; {p['trend']['last14']} in the last 14 days.\n"
-        f"- Coverage is only {p['indicator_pct']:.0f}% — an infrastructure gap of {100 - p['indicator_pct']:.0f} points.\n"
-        f"- Sanctioned so far: ₹{p['sanctioned_cr']} cr; priority score {p['score']} (national rank #{p['rank']}).\n\n"
+        f"average urgency {p['avg_urgency']}/5; {p['trend']['last14']} in the last 14 days.\n"
+        f"{gap_line}\n"
+        f"- Priority score {p['score']} (rank #{p['rank']} nationally).\n\n"
         f"**Citizen voice**\n{quotes}\n\n"
-        f"**Estimated reach:** ~{p['est_underserved']:,} underserved residents.\n\n"
-        f"**Next steps:** field verification by district collector; converge with state budget line.\n\n"
-        f"_Offline template — add GEMINI_API_KEY for an AI-written brief._"
+        f"**Estimated reach:** {reach}\n\n"
+        f"**Next steps:** field check by the district office; match with the state budget line.\n\n"
+        f"_Template brief. Gemini writes this when an API key is set._"
     )

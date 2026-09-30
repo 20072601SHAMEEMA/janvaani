@@ -2,7 +2,7 @@
   --bg: #f5f6fa; --surface: #ffffff; --surface-2: #f0f2f8; --border: #e2e5ee;
   --text: #1b1f33; --muted: #5e6580; --brand: #2b3a8c; --brand-2: #4453b8;
   --accent: #e8780c; --good: #1f8a5b; --warn: #c9851a; --bad: #c2362b;
-  --c-demand: #2b3a8c; --c-gap: #e8780c; --c-reach: #1f8a8a; --c-funding: #8a5bb8; --c-equity: #b8a21f;
+  --c-demand: #2b3a8c; --c-gap: #e8780c; --c-reach: #1f8a8a;
   --radius: 12px; --shadow: 0 1px 2px rgba(20,25,60,.06), 0 4px 16px rgba(20,25,60,.05);
   font-family: "Inter", "Noto Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }

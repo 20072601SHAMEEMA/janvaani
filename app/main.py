@@ -3,6 +3,7 @@ import difflib
 import json
 import math
 import os
+import re
 import sqlite3
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -47,7 +48,8 @@ def meta():
     districts = db.rows("SELECT district, state, lat, lon FROM districts ORDER BY state, district")
     return {
         "ai_mode": ai.mode(),
-        "categories": {k: {"label": v[0], "scheme": v[2]} for k, v in CATEGORIES.items()},
+        "categories": {k: {"label": v[0], "scheme": v[1], "indicator": v[2]} for k, v in CATEGORIES.items()},
+        "district_count": len(districts),
         "languages": LANGUAGES,
         "states": sorted({d["state"] for d in districts}),
         "districts": districts,
@@ -68,7 +70,8 @@ def _filters(state: str | None, category: str | None):
 def stats(state: str | None = None, category: str | None = None):
     w, p = _filters(state, category)
     total = db.rows(f"SELECT COUNT(*) n, COUNT(DISTINCT citizen_hash) c, COUNT(DISTINCT district) d, "
-                    f"COUNT(DISTINCT state) s, COUNT(DISTINCT language) l FROM requests{w}", p)[0]
+                    f"COUNT(DISTINCT state) s, COUNT(DISTINCT language) l, "
+                    f"SUM(ai_mode != 'sample') live FROM requests{w}", p)[0]
     since = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
     week = db.rows(f"SELECT COUNT(*) n FROM requests{w}{' AND' if w else ' WHERE'} created_at >= ?", p + [since])[0]["n"]
     by_cat = db.rows(f"SELECT category, COUNT(*) n, ROUND(AVG(urgency),2) urg FROM requests{w} "
@@ -78,7 +81,7 @@ def stats(state: str | None = None, category: str | None = None):
     daily = db.rows(f"SELECT substr(created_at,1,10) day, COUNT(*) n FROM requests{w} "
                     f"GROUP BY day ORDER BY day DESC LIMIT 60", p)
     return {"total": total["n"], "citizens": total["c"], "districts": total["d"], "states": total["s"],
-            "languages": total["l"], "last7": week, "by_category": by_cat, "by_language": by_lang,
+            "languages": total["l"], "last7": week, "live": total["live"] or 0, "by_category": by_cat, "by_language": by_lang,
             "by_channel": by_channel, "daily": list(reversed(daily))}
 
 
@@ -122,7 +125,7 @@ def _project(district: str, category: str, weights: dict | None = None):
                      "FROM requests WHERE district=? AND category=? GROUP BY cluster_id ORDER BY n DESC LIMIT 8",
                      (district, category))
     samples = db.rows("SELECT id, created_at, channel, language, original_text, translation, urgency, "
-                      "location_text, status FROM requests WHERE district=? AND category=? "
+                      "location_text, status, ai_mode FROM requests WHERE district=? AND category=? "
                       "ORDER BY urgency DESC, created_at DESC LIMIT 6", (district, category))
     langs = db.rows("SELECT language, COUNT(*) n FROM requests WHERE district=? AND category=? "
                     "GROUP BY language ORDER BY n DESC", (district, category))
@@ -143,7 +146,13 @@ def project_brief(district: str, category: str):
     evidence = {
         "priority": p, "top_issue_clusters": issues,
         "sample_requests_en": [s["translation"] for s in samples],
+        "citizen_quotes": [{"text_en": s["translation"], "language": s["language"],
+                            "type": "sample (demonstration)" if s["ai_mode"] == "sample" else "live submission"}
+                           for s in samples],
         "languages_of_requests": langs,
+        "data_notes": "coverage_pct is real NFHS-5 (2019-21) district data; population is Census 2011. "
+                      "Each citizen_quotes item says whether it is a sample (demonstration) or a live submission - "
+                      "label each quote you use accordingly.",
     }
     text, mode = ai.policy_brief(evidence)
     conn = db.connect()
@@ -183,13 +192,21 @@ def _resolve_district(district: str, state: str, analysis: dict, lat: float | No
     names = {d["district"].lower(): d for d in ds}
     if district and district.lower() in names:
         return names[district.lower()]
-    guess = (analysis.get("district_guess") or "").lower()
+    guess = (analysis.get("district_guess") or "").lower().removesuffix(" district")
+    state_guess = (analysis.get("state_guess") or state or "").lower()
     if guess:
-        m = difflib.get_close_matches(guess, names.keys(), n=1, cutoff=0.75)
+        # names shared by two states are stored as "Aurangabad (Bihar)" - use the state to pick one
+        same = [d for d in ds if d["district"].split(" (")[0].lower() == guess]
+        if same:
+            return next((d for d in same if d["state"].lower() == state_guess), same[0])
+        m = difflib.get_close_matches(guess, names.keys(), n=1, cutoff=0.85)
         if m:
             return names[m[0]]
+    # a district named in the message itself (whole words only; skip names like "East" or "North")
     blob = f"{analysis.get('transcript', '')} {analysis.get('translation_en', '')}".lower()
-    mentioned = [d for n, d in names.items() if n in blob]
+    generic = {"east", "west", "north", "south", "central", "new delhi"}
+    mentioned = [d for n, d in names.items()
+                 if len(n) >= 4 and n not in generic and re.search(rf"\b{re.escape(n.split(' (')[0])}\b", blob)]
     if mentioned:
         return max(mentioned, key=lambda d: len(d["district"]))
     if lat is not None and lon is not None:

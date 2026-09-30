@@ -1,15 +1,17 @@
 # Submission package
 
 ## Brief description (2–3 lines)
-JanVaani is an open-source, multilingual AI platform where citizens report development needs by voice, text, photo or
-Telegram in any Indian language. Google Gemini transcribes, translates, classifies and deduplicates each request, and a
-transparent priority engine fuses that demand with district infrastructure, population and investment data. Policymakers get
-a live hotspot map, ranked project recommendations and plain-language analytics.
+JanVaani lets citizens report local needs by voice or text in any Indian language. Google Gemini translates, classifies
+and de-duplicates each request. JanVaani combines these requests with real NFHS-5 and Census 2011 data for 705
+districts, and gives planners a hotspot map, a ranked list of projects with clear reasons, and AI-written policy briefs.
+
+## Data declaration (paste if asked)
+- Real: NFHS-5 (2019–21) district coverage indicators, Census 2011 population, Census 2011 district boundaries, OpenStreetMap.
+- Sample: the starting citizen requests (real complaints are private). They are tagged "sample"; requests submitted in the app are tagged "live".
 
 ## Checklist
-- [ ] Source code: public GitHub repo (this folder)
-- [ ] Deployed link: Cloud Run URL (see README → Deploy)
-- [ ] Demo video, 3–5 min (docs/DEMO_SCRIPT.md), uploaded to YouTube/Drive as unlisted
+- [ ] Source code: public GitHub repo
+- [ ] Deployed link: Cloud Run URL
+- [ ] Demo video, 3–5 min (docs/DEMO_SCRIPT.md)
 - [ ] Pitch deck, 10–12 slides (docs/PITCH_DECK.md)
 - [ ] Brief description (above)
-- [ ] GEMINI_API_KEY set on the deployed service (badge shows "Gemini live")

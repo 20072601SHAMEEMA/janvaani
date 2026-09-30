@@ -16,19 +16,18 @@ flowchart LR
     G1[Gemini multimodal<br/>transcribe · translate · classify<br/>urgency · location · reply]
     E[Gemini embeddings<br/>duplicate clustering]
     R[District resolver<br/>form · Gemini guess · GPS]
-    P[Priority engine<br/>Demand × Gap × Reach × Funding]
+    P[Priority engine<br/>Demand + Gap + Population]
     Q[Ask-the-data<br/>Gemini NL→SQL · read-only sandbox]
     B[Gemini policy brief]
   end
 
   subgraph Data["Data layer"]
     REQ[(requests)]
-    DIST[(district indicators<br/>Census · JJM · PMGSY · NFHS · UDISE+)]
-    INV[(sanctioned investments<br/>by scheme)]
+    DIST[(705 districts<br/>NFHS-5 coverage · Census 2011 population)]
   end
 
   W & T & WA & IVR --> I --> G1 --> R --> E --> REQ
-  REQ & DIST & INV --> P --> D[Policymaker dashboard<br/>map · ranking · weights · briefs]
+  REQ & DIST --> P --> D[Policymaker dashboard<br/>map · ranking · weights · briefs]
   D --> Q --> Data
   D --> B
   I -. ticket + spoken reply in citizen's language .-> W
@@ -51,17 +50,15 @@ flowchart LR
 
 ## 3. Priority model
 
-| Component | Formula | Source |
+| Part | How it is calculated | Source |
 |---|---|---|
-| Demand | √( Σ urgency/5 · e^(−age/45d) ÷ national max ) | citizen requests |
-| Gap | (100 − coverage %) / 100 | district indicator for the sector |
-| Reach | min–max of ln(population) | Census |
-| Funding gap | 1 − sanctioned ₹ per lakh ÷ national max for the sector | scheme MIS / budget data |
-| Equity | +3 points for aspirational districts | NITI Aayog list |
+| Citizen demand (50%) | √( Σ urgency/5 · e^(−age/45 days) ÷ national max ) | citizen requests |
+| Gap (35%) | (100 − coverage %) / 100 | NFHS-5 (2019–21) district fact sheets |
+| Population (15%) | min–max of ln(population) | Census 2011 |
 
-Default weights 0.40 / 0.30 / 0.15 / 0.15. Weights are normalised, exposed as sliders and API parameters, and every
-recommendation ships with its component contributions, so a reviewing officer can see exactly why it ranked where it did.
-**Emerging** flag: ≥10 requests in the last 14 days and at least 2× the prior 14 days.
+Sectors with no NFHS-5 district indicator (roads, digital) use demand and population only, re-weighted.
+Every recommendation shows its parts, and the weights are sliders on the dashboard.
+**Emerging** flag: at least 10 requests in the last 14 days and at least 2× the previous 14 days.
 
 ## 4. Scaling from prototype to national
 
@@ -69,8 +66,8 @@ recommendation ships with its component contributions, so a reviewing officer ca
 |---|---|---|
 | Compute | 1 Cloud Run service | Cloud Run autoscaling per state/region; Pub/Sub queue between intake and AI analysis |
 | Storage | SQLite (seeded at start) | Firestore for live tickets + **BigQuery** for analytics (same schema; NL→SQL targets BigQuery) |
-| Geography | 44 districts, 20 states | All 780+ districts via LGD codes; Google Maps Platform geocoding + India-compliant boundaries |
-| Data | Illustrative indicators | data.gov.in APIs: JJM tap coverage, PMGSY, NFHS-5, UDISE+, BharatNet, PFMS scheme spend |
+| Geography | All 705 NFHS-5 districts, 34 states/UTs | LGD district codes; Google Maps Platform with India-compliant boundaries |
+| Data | NFHS-5 + Census 2011 (real) | Add data.gov.in feeds: JJM tap connections, PMGSY roads, UDISE+ schools, BharatNet, scheme spend |
 | Languages | Gemini (all major Indian languages) | + Bhashini / Cloud Speech-to-Text for low-resource dialects; Cloud TTS for IVR |
 | Channels | Web, Telegram | WhatsApp Business API, IVR/missed-call, CPGRAMS & state grievance portal import |
 | Identity | Hashed phone | Optional DigiLocker/Aadhaar-free OTP; no PII in analytics layer |

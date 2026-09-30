@@ -31,7 +31,7 @@
     <div class="card kpi"><div class="v" id="kCitizens">–</div><div class="l">Unique citizens</div></div>
     <div class="card kpi"><div class="v" id="kLangs">–</div><div class="l">Languages understood</div></div>
     <div class="card kpi"><div class="v" id="kDistricts">–</div><div class="l">Districts · <span id="kStates">–</span> states</div></div>
-    <div class="card kpi"><div class="v" id="kWeek">–</div><div class="l">New in last 7 days</div></div>
+    <div class="card kpi"><div class="v" id="kWeek">–</div><div class="l">New in last 7 days · <span id="kLive">–</span> live</div></div>
   </section>
 
   <section class="grid-main">
@@ -50,10 +50,8 @@
       <div class="card-head"><h2>Recommended priority projects</h2><span class="muted small" id="rankCount"></span></div>
       <div class="legend" style="margin:0 0 8px">
         <span><span class="swatch" style="background:var(--c-demand)"></span>Citizen demand</span>
-        <span><span class="swatch" style="background:var(--c-gap)"></span>Infra gap</span>
-        <span><span class="swatch" style="background:var(--c-reach)"></span>Population reach</span>
-        <span><span class="swatch" style="background:var(--c-funding)"></span>Funding gap</span>
-        <span><span class="swatch" style="background:var(--c-equity)"></span>Aspirational</span>
+        <span><span class="swatch" style="background:var(--c-gap)"></span>Gap (NFHS-5)</span>
+        <span><span class="swatch" style="background:var(--c-reach)"></span>Population (Census 2011)</span>
       </div>
       <div class="rank-list" id="ranks"></div>
     </div>
@@ -67,7 +65,7 @@
   <section class="card" style="margin-top:14px">
     <div class="card-head"><h2>Ask the data</h2><span class="muted small">Plain-language questions → Gemini → safe read-only SQL</span></div>
     <form class="ask-row" id="askForm">
-      <input type="text" id="askQ" placeholder="e.g. Which aspirational districts have the most urgent health requests?" aria-label="Question">
+      <input type="text" id="askQ" placeholder="e.g. Which districts in Uttar Pradesh have the lowest electricity coverage?" aria-label="Question">
       <button id="askBtn">Ask</button>
     </form>
     <div class="examples" id="examples"></div>
@@ -91,9 +89,10 @@
     </div>
   </section>
 
-  <p class="muted small" style="margin-top:18px">Demo dataset: district populations approximate Census 2011; infrastructure indices and sanctioned-investment
-    figures are illustrative, modelled on public indicators (Jal Jeevan Mission, PMGSY, NFHS, UDISE+). Swap in data.gov.in exports for pilots.
-    Open-source Digital Public Good.</p>
+  <p class="muted small" style="margin-top:18px"><b>Data used:</b> district coverage figures are real NFHS-5 (2019–21, Ministry of Health &amp; Family Welfare)
+    for all 705 districts; population is the official Census 2011 count; district map points from Census 2011 boundaries (datameet) and
+    OpenStreetMap for districts created after 2011. Requests tagged <i>sample</i> are demonstration requests (real complaints are private);
+    requests tagged <i>live</i> were submitted through this app. Open source, MIT licence.</p>
 </main>
 
 <div class="overlay" id="overlay"></div>

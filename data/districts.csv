@@ -1,45 +1,706 @@
-district,state,lat,lon,population,aspirational,water,roads,health,education,power,sanitation,digital
-Guntur,Andhra Pradesh,16.31,80.44,4887813,0,72,81,64,70,93,68,58
-Visakhapatnam,Andhra Pradesh,17.69,83.22,4290589,1,61,66,55,62,88,63,52
-Anantapur,Andhra Pradesh,14.68,77.60,4081148,0,58,74,57,64,90,55,49
-Hyderabad,Telangana,17.39,78.49,3943323,0,88,92,78,80,97,74,86
-Nalgonda,Telangana,17.05,79.27,3488809,0,76,78,60,66,94,61,55
-Chennai,Tamil Nadu,13.08,80.27,4646732,0,79,93,82,83,98,70,88
-Madurai,Tamil Nadu,9.93,78.12,3038252,0,74,86,72,76,96,66,70
-Ramanathapuram,Tamil Nadu,9.37,78.83,1353445,1,49,72,58,68,92,52,55
-Bengaluru Urban,Karnataka,12.97,77.59,9621551,0,70,85,80,82,97,69,92
-Raichur,Karnataka,16.21,77.36,1928812,1,52,63,48,55,90,44,45
-Kalaburagi,Karnataka,17.33,76.83,2566326,0,58,68,55,58,91,47,50
-Wayanad,Kerala,11.69,76.13,817420,1,56,70,66,78,95,80,61
-Thiruvananthapuram,Kerala,8.52,76.94,3301427,0,74,88,84,86,99,90,82
-Pune,Maharashtra,18.52,73.86,9429408,0,82,88,80,82,97,76,90
-Nandurbar,Maharashtra,21.37,74.24,1648295,1,44,55,42,50,84,38,36
-Gadchiroli,Maharashtra,20.18,80.00,1072942,1,41,46,39,49,80,40,28
-Ahmedabad,Gujarat,23.02,72.57,7214225,0,90,91,78,80,99,78,88
-Dahod,Gujarat,22.83,74.26,2127086,1,55,64,46,55,92,45,40
-Jaipur,Rajasthan,26.91,75.79,6626178,0,68,84,72,74,94,70,80
-Barmer,Rajasthan,25.75,71.39,2603751,1,31,58,40,52,86,42,38
-Jaisalmer,Rajasthan,26.92,70.91,669919,1,29,52,38,50,84,40,35
-Lucknow,Uttar Pradesh,26.85,80.95,4589838,0,70,86,74,72,92,66,80
-Bahraich,Uttar Pradesh,27.57,81.60,3487731,1,46,57,33,45,76,39,37
-Shravasti,Uttar Pradesh,27.51,82.05,1117361,1,43,52,30,42,74,35,33
-Patna,Bihar,25.59,85.14,5838465,0,64,80,66,66,90,58,74
-Araria,Bihar,26.15,87.47,2811569,1,38,47,35,44,78,30,34
-Kishanganj,Bihar,26.10,87.95,1690400,1,40,49,34,43,79,32,33
-Kolkata,West Bengal,22.57,88.36,4496694,0,80,90,82,80,98,72,89
-Purulia,West Bengal,23.33,86.36,2930115,1,39,60,45,52,85,40,39
-Khordha,Odisha,20.18,85.62,2251673,0,72,82,72,74,94,64,76
-Koraput,Odisha,18.81,82.71,1379647,1,42,50,40,50,82,36,33
-Malkangiri,Odisha,18.35,81.89,613192,1,35,38,31,44,76,30,24
-Ranchi,Jharkhand,23.34,85.31,2914253,1,55,72,60,62,88,52,66
-Pashchimi Singhbhum,Jharkhand,22.57,85.82,1502338,1,33,45,36,46,78,33,30
-Indore,Madhya Pradesh,22.72,75.86,3276697,0,78,88,76,78,96,86,84
-Jhabua,Madhya Pradesh,22.77,74.59,1025048,1,37,56,38,47,85,36,32
-Bastar,Chhattisgarh,19.10,81.95,834873,1,40,50,39,52,83,41,30
-Dantewada,Chhattisgarh,18.90,81.35,283479,1,36,44,37,50,80,38,26
-Kamrup Metropolitan,Assam,26.14,91.74,1253938,0,66,82,74,74,93,65,78
-Dhubri,Assam,26.02,89.98,1949258,1,36,48,34,42,80,31,32
-Ludhiana,Punjab,30.90,75.85,3498739,0,84,90,74,76,97,74,84
-Kupwara,Jammu and Kashmir,34.53,74.26,870354,1,50,54,44,56,82,48,30
-West Garo Hills,Meghalaya,25.57,90.22,643291,1,39,47,41,50,80,44,34
-Chamba,Himachal Pradesh,32.55,76.13,519080,1,62,50,50,66,94,60,40
+district,state,lat,lon,population_2011,water,sanitation,power,health,education,note
+Nicobar,Andaman and Nicobar Islands,7.5169,93.6029,36842,98.8,83.5,97.9,97.8,78.0,census2011
+North & Middle Andaman,Andaman and Nicobar Islands,12.8379,92.8675,105597,92.2,86.4,93.2,97.7,82.7,census2011
+South Andaman,Andaman and Nicobar Islands,11.5193,92.649,238142,97.9,89.3,99.6,99.5,84.7,census2011
+Anantapur,Andhra Pradesh,14.481,77.5769,4081148,98.8,71.3,99.6,94.7,59.5,census2011
+Chittoor,Andhra Pradesh,13.4672,79.0143,4174064,98.5,74.6,99.7,97.1,65.6,census2011
+East Godavari,Andhra Pradesh,17.1885,82.0118,5154296,97.9,77.7,98.8,96.6,75.4,census2011
+Guntur,Andhra Pradesh,16.2988,80.0915,4887813,99.3,83.4,99.2,98.6,64.9,census2011
+Krishna,Andhra Pradesh,16.5626,80.8007,4517398,94.4,79.1,99.6,98.9,74.0,census2011
+Kurnool,Andhra Pradesh,15.5336,78.0061,4053463,97.9,73.5,99.9,88.5,55.2,census2011
+Prakasam,Andhra Pradesh,15.6213,79.5158,3397448,98.6,78.4,99.3,97.4,58.1,census2011
+Sri Potti Sriramulu Nellore,Andhra Pradesh,14.4268,79.7344,2963557,95.6,81.8,99.1,97.0,67.9,census2011
+Srikakulam,Andhra Pradesh,18.5786,83.9881,2703114,87.7,71.6,99.9,97.9,60.0,census2011
+Visakhapatnam,Andhra Pradesh,17.8909,82.6925,4290589,91.8,77.8,99.6,95.3,66.8,census2011
+Vizianagaram,Andhra Pradesh,18.4674,83.3793,2344474,93.1,61.7,99.5,99.0,56.0,census2011
+West Godavari,Andhra Pradesh,16.8946,81.4023,3936966,99.1,80.8,99.3,98.7,75.4,census2011
+Y.S.R.,Andhra Pradesh,14.4599,78.7836,2882469,99.9,85.4,99.8,99.4,61.9,census2011
+Anjaw,Arunachal Pradesh,28.0655,96.8288,21167,86.6,86.8,96.4,78.0,61.5,census2011
+Changlang,Arunachal Pradesh,27.3626,96.3452,148226,81.8,82.3,95.2,75.1,74.6,census2011
+Dibang Valley,Arunachal Pradesh,28.9513,95.9028,8004,100.0,95.0,79.2,85.5,67.6,census2011
+East Kameng,Arunachal Pradesh,27.4411,92.968,78690,93.6,75.6,86.3,76.0,63.1,census2011
+East Siang,Arunachal Pradesh,28.1238,95.1634,99214,97.3,83.9,97.3,90.8,76.8,census2011
+Kra Daadi,Arunachal Pradesh,27.9635,93.7666,,99.8,89.3,99.7,73.5,58.1,created after 2011 (no Census 2011 population)
+Kurung Kumey,Arunachal Pradesh,27.9998,93.3924,92076,99.8,78.3,99.2,69.2,72.6,census2011
+Lohit,Arunachal Pradesh,27.8401,96.1952,145726,96.9,83.7,98.9,90.2,73.3,census2011
+Longding,Arunachal Pradesh,26.8795,95.3156,,62.5,83.5,97.4,64.5,63.2,created after 2011 (no Census 2011 population)
+Lower Dibang Valley,Arunachal Pradesh,28.3726,95.8804,54080,99.5,89.9,84.4,90.1,76.8,census2011
+Lower Subansiri,Arunachal Pradesh,27.6255,93.9391,83030,98.1,82.8,97.8,89.8,73.1,census2011
+Namsai,Arunachal Pradesh,27.714,96.016,,93.5,75.1,96.5,63.6,72.1,created after 2011 (no Census 2011 population)
+Papum Pare,Arunachal Pradesh,27.2888,93.5969,176573,92.9,75.7,98.7,88.0,77.6,census2011
+Siang,Arunachal Pradesh,28.4775,94.8166,,96.3,91.2,99.6,81.1,78.6,created after 2011 (no Census 2011 population)
+Tawang,Arunachal Pradesh,27.6619,91.9536,49977,99.8,81.7,99.7,84.2,59.3,census2011
+Tirap,Arunachal Pradesh,26.9471,95.4409,111975,93.8,86.7,98.8,70.2,69.0,census2011
+Upper Siang,Arunachal Pradesh,28.8336,94.9181,35320,99.8,91.8,99.5,76.0,69.5,census2011
+Upper Subansiri,Arunachal Pradesh,28.29,93.9367,83448,94.7,80.9,87.0,77.0,61.4,census2011
+West Kameng,Arunachal Pradesh,27.3029,92.411,83947,99.8,88.9,97.5,93.6,73.0,census2011
+West Siang,Arunachal Pradesh,28.3209,94.5116,112274,99.1,87.7,88.2,84.6,73.6,census2011
+Baksa,Assam,26.6648,91.3465,950075,89.8,68.9,98.1,89.9,74.1,census2011
+Barpeta,Assam,26.3402,91.0108,1693622,98.1,63.7,88.9,87.6,75.4,census2011
+Biswanath,Assam,26.7939,93.3592,,76.2,76.6,91.1,84.3,72.1,created after 2011 (no Census 2011 population)
+Bongaigaon,Assam,26.3652,90.6248,738804,95.3,72.5,97.0,84.5,77.0,census2011
+Cachar,Assam,24.8112,92.8564,1736617,43.8,57.6,81.7,79.2,80.5,census2011
+Charaideo,Assam,27.0697,95.0642,,96.4,75.9,91.7,88.2,75.0,created after 2011 (no Census 2011 population)
+Chirang,Assam,26.643,90.6163,482162,92.1,77.1,97.8,83.7,71.5,census2011
+Darrang,Assam,26.4493,92.0374,928500,99.7,67.9,89.5,84.4,75.2,census2011
+Dhemaji,Assam,27.5777,94.7778,686133,95.3,70.8,95.0,87.3,77.3,census2011
+Dhubri,Assam,26.0675,90.0224,1949258,96.7,61.8,92.5,64.2,71.8,census2011
+Dibrugarh,Assam,27.3664,95.0562,1326335,98.1,75.3,94.4,93.1,79.5,census2011
+Dima Hasao,Assam,25.3771,93.0342,214102,50.2,83.8,95.9,89.5,85.1,census2011
+Goalpara,Assam,26.0555,90.6055,1008183,90.7,75.3,89.6,92.3,78.5,census2011
+Golaghat,Assam,26.4573,93.8334,1066888,93.7,73.1,96.4,90.4,77.6,census2011
+Hailakandi,Assam,24.4941,92.5888,659296,41.2,60.0,91.2,83.0,81.5,census2011
+Hojai,Assam,25.9629,92.9818,,99.9,63.1,96.3,82.1,79.1,created after 2011 (no Census 2011 population)
+Jorhat,Assam,26.794,94.2565,1092256,85.9,80.4,95.1,96.5,84.4,census2011
+Kamrup,Assam,26.118,91.4061,1517542,92.1,68.7,94.8,85.0,79.4,census2011
+Kamrup Metropolitan,Assam,26.09,91.8216,1253938,87.2,65.2,99.2,89.1,87.5,census2011
+Karbi Anglong,Assam,26.0655,93.1487,956313,79.6,75.2,97.0,74.9,76.4,census2011
+Karimganj,Assam,24.5813,92.3775,1228686,62.3,61.5,87.1,76.4,82.1,census2011
+Kokrajhar,Assam,26.5145,90.1306,887142,87.3,72.2,93.9,81.9,75.2,census2011
+Lakhimpur,Assam,27.169,94.1258,1042137,81.2,74.2,97.2,96.2,83.2,census2011
+Majuli,Assam,27.022,94.3274,,98.6,65.6,93.5,90.3,78.4,created after 2011 (no Census 2011 population)
+Morigaon,Assam,26.2848,92.282,957423,94.6,62.3,89.5,88.3,79.1,census2011
+Nagaon,Assam,26.223,92.8425,2823768,96.1,66.1,94.5,83.7,81.3,census2011
+Nalbari,Assam,26.3679,91.3877,771639,99.5,68.1,94.7,91.8,81.8,census2011
+Sivasagar,Assam,27.0073,94.82,1151050,92.7,82.3,97.0,95.3,87.1,census2011
+Sonitpur,Assam,26.7824,92.9393,1924110,82.9,72.2,88.2,83.5,74.9,census2011
+South Salmara Mancachar,Assam,25.7604,89.8928,,98.2,59.0,79.5,71.7,69.4,created after 2011 (no Census 2011 population)
+Tinsukia,Assam,27.5786,95.6265,1327929,96.8,66.7,95.7,82.6,72.6,census2011
+Udalguri,Assam,26.7301,92.0373,831668,82.3,73.8,95.5,86.2,70.6,census2011
+West Karbi Anglong,Assam,25.8529,92.5876,,44.7,76.7,94.7,72.5,73.8,created after 2011 (no Census 2011 population)
+Araria,Bihar,26.1995,87.3543,2811569,100.0,32.2,96.2,66.2,53.0,census2011
+Arwal,Bihar,25.1616,84.6904,700843,99.9,43.4,97.4,79.2,62.6,census2011
+Aurangabad,Bihar,24.7929,84.4122,2540073,100.0,47.1,97.7,77.5,65.0,census2011
+Banka,Bihar,24.8537,86.8409,2034763,96.3,38.2,96.2,79.8,59.3,census2011
+Begusarai,Bihar,25.4953,86.1308,2970541,99.1,62.2,96.2,86.0,65.0,census2011
+Bhagalpur,Bihar,25.2705,87.0844,3037766,98.0,60.9,94.5,77.2,65.1,census2011
+Bhojpur,Bihar,25.469,84.5437,2728407,99.7,45.9,97.9,86.9,67.9,census2011
+Buxer,Bihar,25.4914,84.1018,1706352,99.8,52.4,98.5,89.5,64.8,census2011
+Darbhanga,Bihar,26.1138,86.0253,3937385,99.8,48.7,97.2,69.9,54.9,census2011
+Gaya,Bihar,24.6991,84.936,4391418,99.2,44.4,97.9,76.6,59.6,census2011
+Gopalganj,Bihar,26.4427,84.3773,2562012,99.9,60.1,96.2,85.9,63.3,census2011
+Jamui,Bihar,24.7838,86.2952,1760405,90.5,37.6,97.9,73.4,53.1,census2011
+Jehanabad,Bihar,25.1566,85.0301,1125313,99.8,45.5,99.3,89.1,61.7,census2011
+Kaimur (Bhabua),Bihar,24.9911,83.6067,1626384,98.0,59.1,96.7,83.3,62.3,census2011
+Katihar,Bihar,25.5454,87.645,3071029,99.2,44.6,92.0,66.9,57.5,census2011
+Khagaria,Bihar,25.5122,86.6031,1666886,98.8,65.0,94.5,74.2,60.6,census2011
+Kishanganj,Bihar,26.2956,87.9353,1690400,100.0,52.4,95.8,54.6,56.0,census2011
+Lakhisarai,Bihar,25.1555,86.1312,1000912,96.6,51.6,98.0,75.8,61.2,census2011
+Madhepura,Bihar,25.8259,86.8963,2001762,99.3,34.6,97.0,75.0,58.0,census2011
+Madhubani,Bihar,26.4057,86.2179,4487379,100.0,38.2,98.6,73.7,55.6,census2011
+Munger,Bihar,25.21,86.5274,1367765,97.7,62.8,98.4,93.2,69.5,census2011
+Muzaffarpur,Bihar,26.1511,85.3308,4801062,99.9,55.2,96.6,72.5,65.1,census2011
+Nalanda,Bihar,25.2208,85.4559,2877653,98.9,52.5,98.9,80.3,59.6,census2011
+Nawada,Bihar,24.811,85.5941,2219146,99.3,47.9,97.4,79.9,61.4,census2011
+Pashchim Champaran,Bihar,27.0792,84.3412,3935042,99.7,43.3,93.5,79.5,59.8,census2011
+Patna,Bihar,25.4564,85.2222,5838465,98.8,61.0,99.0,89.1,69.5,census2011
+Purba Champaran,Bihar,26.6184,84.9247,5099371,99.9,48.3,94.8,61.5,58.2,census2011
+Purnia,Bihar,25.8161,87.4071,3264619,99.6,35.6,92.4,68.9,53.6,census2011
+Rohtas,Bihar,24.9794,84.0277,2959918,99.6,69.0,98.5,89.1,70.5,census2011
+Saharsa,Bihar,25.8166,86.5898,1900661,100.0,40.5,97.2,70.4,50.2,census2011
+Samastipur,Bihar,25.777,85.9037,4261566,98.6,48.8,95.7,83.4,60.9,census2011
+Saran,Bihar,25.9047,84.8253,3951862,99.7,37.2,93.6,73.0,64.8,census2011
+Sheikhpura,Bihar,25.1319,85.8289,636342,98.4,54.2,97.3,89.2,58.5,census2011
+Sheohar,Bihar,26.527,85.2899,656246,100.0,57.9,97.6,74.3,56.2,census2011
+Sitamarhi,Bihar,26.576,85.5397,3423574,99.7,50.7,93.1,64.4,59.1,census2011
+Siwan,Bihar,26.1608,84.3895,3330464,99.8,47.7,95.3,86.4,70.7,census2011
+Supaul,Bihar,26.2477,86.8001,2229076,99.7,50.7,97.3,80.4,50.9,census2011
+Vaishali,Bihar,25.7623,85.37,3495021,99.2,52.6,96.5,81.6,64.5,census2011
+Balod,Chhattisgarh,20.7277,81.1447,,99.5,83.8,99.7,97.4,76.4,created after 2011 (no Census 2011 population)
+Baloda Bazar,Chhattisgarh,21.5732,82.2995,,94.8,78.9,99.2,78.1,66.7,created after 2011 (no Census 2011 population)
+Balrampur,Chhattisgarh,23.6283,83.4811,,84.4,57.3,97.9,78.9,62.1,created after 2011 (no Census 2011 population)
+Bastar,Chhattisgarh,19.422,81.7703,1413199,94.1,61.0,96.8,63.5,58.0,census2011
+Bemetara,Chhattisgarh,21.6784,81.4413,,98.8,80.5,99.7,95.0,65.3,created after 2011 (no Census 2011 population)
+Bijapur,Chhattisgarh,18.8432,80.7761,255230,94.3,30.6,86.8,63.6,47.4,census2011
+Bilaspur,Chhattisgarh,22.3513,81.9617,2663629,93.6,80.5,98.6,79.4,71.0,census2011
+Dantewada,Chhattisgarh,18.5,81.3796,533638,95.1,60.5,95.9,90.5,51.0,census2011
+Dhamtari,Chhattisgarh,20.5561,81.8105,799781,99.1,89.8,99.9,94.3,77.3,census2011
+Durg,Chhattisgarh,21.1912,81.3538,3343872,98.5,89.5,99.6,96.7,79.4,census2011
+Gariyaband,Chhattisgarh,20.5268,82.1917,,96.8,81.0,98.7,87.6,67.4,created after 2011 (no Census 2011 population)
+Janjgir - Champa,Chhattisgarh,21.9262,82.7379,1619707,97.2,78.8,99.5,86.2,67.7,census2011
+Jashpur,Chhattisgarh,22.8004,83.8664,851669,88.8,72.8,98.2,85.6,67.9,census2011
+Kabeerdham,Chhattisgarh,22.091,81.2231,822526,97.9,80.3,99.5,91.7,61.7,census2011
+Kodagaon,Chhattisgarh,19.6702,81.5684,,98.8,79.5,97.8,78.7,57.5,created after 2011 (no Census 2011 population)
+Korba,Chhattisgarh,22.5323,82.6119,1206640,82.2,73.3,97.9,75.4,71.1,census2011
+Koriya,Chhattisgarh,23.4681,82.2372,658917,87.6,73.3,97.6,80.8,69.7,census2011
+Mahasamund,Chhattisgarh,21.2071,82.6128,1032754,98.8,84.2,98.4,92.9,68.6,census2011
+Mungeli,Chhattisgarh,22.0661,81.6874,,98.0,80.7,99.7,69.8,63.6,created after 2011 (no Census 2011 population)
+Narayanpur,Chhattisgarh,19.6043,81.0812,139820,90.5,52.8,90.1,74.2,54.0,census2011
+Raigarh,Chhattisgarh,22.0858,83.306,1493984,97.5,66.3,99.0,87.7,72.2,census2011
+Raipur,Chhattisgarh,21.0713,82.174,4063872,99.7,84.0,99.5,90.7,77.1,census2011
+Rajnandgaon,Chhattisgarh,21.0394,80.8193,1537133,98.8,79.2,99.3,95.5,73.4,census2011
+Sukma,Chhattisgarh,18.2665,81.2925,,96.0,35.5,98.3,81.2,45.9,created after 2011 (no Census 2011 population)
+Surajpur,Chhattisgarh,23.3578,82.9761,,83.4,75.4,98.7,85.9,64.8,created after 2011 (no Census 2011 population)
+Surguja,Chhattisgarh,23.3578,83.2194,2359886,96.4,75.8,99.3,85.3,66.3,census2011
+Uttar Bastar Kanker,Chhattisgarh,20.1477,81.1292,748941,98.7,80.5,99.4,94.1,70.2,census2011
+Dadra & Nagar Haveli,Dadra and Nagar Haveli and Daman and Diu,20.1951,73.0707,343709,94.8,63.1,99.7,96.3,70.8,census2011
+Daman,Dadra and Nagar Haveli and Daman and Diu,20.4141,72.8524,191173,96.0,67.1,99.5,97.4,83.8,census2011
+Diu,Dadra and Nagar Haveli and Daman and Diu,20.7209,70.9399,52074,99.7,89.7,100.0,95.7,77.8,census2011
+North Goa,Goa,15.5525,73.9807,818008,98.1,87.7,100.0,99.6,89.5,census2011
+South Goa,Goa,15.1964,74.1184,640537,99.0,88.2,100.0,100.0,88.2,census2011
+Ahmedabad,Gujarat,22.71,72.196,7214225,98.7,86.4,99.5,94.5,79.8,census2011
+Amreli,Gujarat,21.3839,71.2165,1514190,97.8,73.3,99.6,90.1,69.9,census2011
+Anand,Gujarat,22.448,72.7773,2092745,99.7,82.1,98.0,96.0,75.2,census2011
+Aravali,Gujarat,23.4843,73.3986,,98.5,56.3,96.5,92.2,68.6,created after 2011 (no Census 2011 population)
+Banaskantha,Gujarat,24.2835,72.0319,3120506,93.6,53.9,91.1,92.9,61.1,census2011
+Bharuch,Gujarat,21.7864,72.9251,1551019,97.2,77.7,98.2,91.1,76.7,census2011
+Bhavnagar,Gujarat,21.6666,71.8411,2880365,95.1,72.9,96.9,94.2,72.0,census2011
+Botad,Gujarat,22.0467,71.669,,99.2,72.0,99.3,93.5,68.9,created after 2011 (no Census 2011 population)
+Chhota Udaipur,Gujarat,22.2224,73.7779,,97.4,53.0,95.3,85.7,52.3,created after 2011 (no Census 2011 population)
+Dahod,Gujarat,22.8573,74.1159,2127086,91.0,35.9,89.3,92.5,59.6,census2011
+Devbhumi Dwarka,Gujarat,22.2429,68.9656,,93.9,73.4,98.7,94.8,59.0,created after 2011 (no Census 2011 population)
+Gandhinagar,Gujarat,23.255,72.6923,1391753,99.7,84.6,97.8,97.8,77.6,census2011
+Gir Somnath,Gujarat,20.9298,70.7628,,98.2,74.3,99.5,87.1,65.8,created after 2011 (no Census 2011 population)
+Jamnagar,Gujarat,22.2522,69.9136,2160119,99.7,86.6,98.9,96.5,72.8,census2011
+Junagadh,Gujarat,21.2215,70.554,2743082,97.0,81.7,99.3,97.4,73.8,census2011
+Kachchh,Gujarat,23.6284,69.96,2092371,96.8,85.8,99.2,97.4,66.6,census2011
+Kheda,Gujarat,22.8763,73.0167,2299885,97.7,63.3,96.9,95.2,74.0,census2011
+Mahesana,Gujarat,23.609,72.4619,2035064,97.0,72.1,97.7,97.3,71.3,census2011
+Mahisagar,Gujarat,23.1912,73.6644,,94.8,44.4,95.2,93.0,66.1,created after 2011 (no Census 2011 population)
+Morbi,Gujarat,22.8004,70.8862,,98.3,80.1,99.9,94.8,70.5,created after 2011 (no Census 2011 population)
+Narmada,Gujarat,21.7354,73.6475,590297,96.8,54.6,92.7,81.7,66.0,census2011
+Navsari,Gujarat,20.8152,73.0897,1329672,97.4,80.1,98.7,99.3,77.9,census2011
+Panchmahal,Gujarat,22.904,73.6641,2390776,91.0,58.9,95.5,88.4,70.1,census2011
+Patan,Gujarat,23.7694,71.7524,1343734,99.4,73.1,98.3,98.6,64.8,census2011
+Porbandar,Gujarat,21.6535,69.778,585449,96.2,85.7,99.8,100.0,74.9,census2011
+Rajkot,Gujarat,22.2627,70.775,3804558,99.5,85.4,99.6,99.3,78.4,census2011
+Sabarkantha,Gujarat,23.6593,73.1637,2428589,90.7,61.0,95.3,89.4,68.7,census2011
+Surat,Gujarat,21.266,73.072,6081322,98.9,82.0,99.3,97.7,82.7,census2011
+Surendranagar,Gujarat,22.7982,71.5401,1756268,96.9,63.8,99.4,85.6,66.0,census2011
+Tapi,Gujarat,21.1916,73.6312,807022,99.0,70.2,97.6,92.9,66.1,census2011
+The Dangs,Gujarat,20.8044,73.7013,228291,91.2,71.7,95.9,74.5,69.9,census2011
+Vadodara,Gujarat,22.2331,73.5319,4165626,99.5,85.6,97.3,95.9,82.0,census2011
+Valsad,Gujarat,20.4185,73.1147,1705678,98.0,85.3,98.6,96.5,79.0,census2011
+Ambala,Haryana,30.3285,76.9422,1128350,99.3,87.2,99.6,97.8,82.2,census2011
+Bhiwani,Haryana,28.7179,75.9676,1634445,97.5,89.7,100.0,97.7,70.2,census2011
+Charkhi Dadri,Haryana,28.6001,76.1124,,97.3,90.4,99.5,98.9,69.6,created after 2011 (no Census 2011 population)
+Faridabad,Haryana,28.3327,77.3548,1809733,97.9,84.2,100.0,92.5,80.5,census2011
+Fatehabad,Haryana,29.5764,75.5792,942011,99.8,87.3,99.8,97.9,67.3,census2011
+Gurgaon,Haryana,28.3681,76.9408,1514432,99.7,84.5,99.4,96.7,80.9,census2011
+Hisar,Haryana,29.2151,75.8156,1743931,99.3,89.1,99.7,98.2,69.3,census2011
+Jhajjar,Haryana,28.6048,76.6494,958405,96.6,91.7,99.8,97.2,77.3,census2011
+Jind,Haryana,29.4354,76.3009,1334152,96.2,88.5,100.0,98.7,71.4,census2011
+Kaithal,Haryana,29.814,76.4182,1074304,98.5,89.7,100.0,98.2,66.3,census2011
+Karnal,Haryana,29.6875,76.8847,1505324,99.9,83.5,99.2,99.0,79.2,census2011
+Kurukshetra,Haryana,30.0451,76.7862,964655,99.9,82.6,99.6,98.4,75.3,census2011
+Mahendragarh,Haryana,28.1729,76.1432,922088,99.7,79.8,99.6,98.9,70.0,census2011
+Mewat,Haryana,27.9817,77.0466,1089263,97.1,71.7,98.6,74.6,51.2,census2011
+Palwal,Haryana,28.0475,77.3183,1042708,96.7,80.3,98.9,78.3,67.0,census2011
+Panchkula,Haryana,30.686,76.9776,561293,99.2,82.6,99.5,97.0,81.2,census2011
+Panipat,Haryana,29.3326,76.9263,1205437,99.9,79.3,99.6,97.1,78.3,census2011
+Rewari,Haryana,28.2358,76.5433,900332,99.7,86.4,100.0,98.7,74.6,census2011
+Rohtak,Haryana,28.9145,76.5292,1061204,98.5,90.0,99.7,97.4,79.6,census2011
+Sirsa,Haryana,29.6148,74.9015,1295189,99.3,81.9,99.9,99.3,68.3,census2011
+Sonipat,Haryana,29.0617,76.8795,1450001,97.2,86.7,99.3,99.7,78.9,census2011
+Yamunanagar,Haryana,30.2364,77.305,1214205,100.0,83.5,99.8,94.8,79.1,census2011
+Bilaspur,Himachal Pradesh,31.3723,76.6719,381956,92.9,80.8,100.0,91.7,81.3,census2011
+Chamba,Himachal Pradesh,32.6775,76.3542,519080,85.5,86.5,99.1,72.0,70.1,census2011
+Hamirpur,Himachal Pradesh,31.668,76.5258,454768,98.0,85.5,99.7,97.6,86.7,census2011
+Kangra,Himachal Pradesh,32.1088,76.3177,1510075,98.6,73.3,99.7,90.2,84.1,census2011
+Kinnaur,Himachal Pradesh,31.5968,78.4126,84121,96.9,80.1,99.6,82.7,73.8,census2011
+Kullu,Himachal Pradesh,31.9045,77.4002,437903,94.3,81.2,99.2,87.0,77.4,census2011
+Lahul and Spiti,Himachal Pradesh,32.4805,77.6161,31564,89.2,61.7,99.8,86.4,65.6,census2011
+Mandi,Himachal Pradesh,31.6383,76.9929,999777,96.5,87.0,99.5,86.6,79.2,census2011
+Shimla,Himachal Pradesh,31.197,77.6324,814010,97.3,87.3,100.0,92.2,81.6,census2011
+Sirmaur,Himachal Pradesh,30.6676,77.431,529855,95.7,84.3,99.2,87.4,75.7,census2011
+Solan,Himachal Pradesh,31.0429,76.9095,580320,96.5,81.8,99.2,90.2,82.4,census2011
+Una,Himachal Pradesh,31.5807,76.2101,521173,98.8,81.4,98.5,89.7,86.1,census2011
+Anantnag,Jammu and Kashmir,33.8152,75.3575,1078692,99.3,84.7,98.7,90.5,65.5,census2011
+Badgam,Jammu and Kashmir,33.89,74.663,753745,95.8,77.0,99.5,96.5,62.5,census2011
+Bandipore,Jammu and Kashmir,34.504,74.8283,392232,89.8,66.8,99.0,92.8,62.4,census2011
+Baramula,Jammu and Kashmir,34.1627,74.4634,1008039,93.3,77.7,98.7,96.2,62.9,census2011
+Doda,Jammu and Kashmir,33.1008,75.6497,409936,92.6,70.9,99.6,73.5,65.1,census2011
+Ganderbal,Jammu and Kashmir,34.2947,75.2,297446,97.2,78.4,99.5,98.0,60.2,census2011
+Jammu,Jammu and Kashmir,32.7625,74.7884,1529958,99.9,81.2,100.0,96.5,84.0,census2011
+Kathua,Jammu and Kashmir,32.5663,75.5938,616435,96.1,75.4,99.7,97.1,77.4,census2011
+Kishtwar,Jammu and Kashmir,33.5296,76.0146,230696,86.8,59.6,88.8,91.6,68.9,census2011
+Kulgam,Jammu and Kashmir,33.5882,74.8606,424483,96.4,80.5,99.8,98.9,64.0,census2011
+Kupwara,Jammu and Kashmir,34.5319,74.2661,870354,88.0,67.7,99.3,97.1,68.7,census2011
+Pulwama,Jammu and Kashmir,33.933,75.0373,560440,98.0,91.6,99.1,97.8,67.2,census2011
+Punch,Jammu and Kashmir,33.7018,74.1992,476835,76.8,66.7,99.7,86.0,72.1,census2011
+Rajouri,Jammu and Kashmir,33.3102,74.3988,642415,77.7,63.3,100.0,88.8,72.6,census2011
+Ramban,Jammu and Kashmir,33.323,75.1861,283713,73.4,48.9,97.4,80.4,60.8,census2011
+Reasi,Jammu and Kashmir,33.2074,74.8223,314667,76.5,62.7,99.9,69.3,66.9,census2011
+Samba,Jammu and Kashmir,32.5752,75.1093,318898,95.4,78.8,99.8,97.9,76.6,census2011
+Shupiyan,Jammu and Kashmir,33.7307,74.8187,266215,99.2,86.5,99.9,98.3,71.4,census2011
+Srinagar,Jammu and Kashmir,34.1758,74.9148,1236829,98.5,86.8,100.0,99.2,68.2,census2011
+Udhampur,Jammu and Kashmir,32.894,75.3276,554985,76.4,69.8,99.9,87.2,73.0,census2011
+Bokaro,Jharkhand,23.6915,85.988,2062330,86.4,64.4,97.3,80.9,71.5,census2011
+Chatra,Jharkhand,24.1735,84.8871,1042886,83.3,48.1,92.1,71.5,60.7,census2011
+Deoghar,Jharkhand,24.328,86.7411,1492073,90.8,41.6,95.6,61.3,59.8,census2011
+Dhanbad,Jharkhand,23.8293,86.4719,2684487,88.9,67.6,98.5,78.8,68.7,census2011
+Dumka,Jharkhand,24.3197,87.2666,1321442,92.6,41.5,93.2,60.3,59.7,census2011
+Garhwa,Jharkhand,24.101,83.6993,1322784,92.5,54.1,85.0,84.0,60.5,census2011
+Giridih,Jharkhand,24.2964,86.1103,2445474,87.6,59.2,96.5,70.7,61.6,census2011
+Godda,Jharkhand,24.8596,87.3121,1313551,91.4,54.9,93.5,70.2,52.7,census2011
+Gumla,Jharkhand,23.1023,84.5347,1025213,75.2,50.1,89.1,83.8,65.1,census2011
+Hazaribagh,Jharkhand,23.99,85.4132,1734495,85.5,55.6,98.2,82.0,66.1,census2011
+Jamtara,Jharkhand,23.9769,86.9172,791042,93.0,52.8,92.2,75.4,63.7,census2011
+Khunti,Jharkhand,22.9977,85.2745,531885,68.6,55.2,92.9,73.8,63.1,census2011
+Kodarma,Jharkhand,24.437,85.5956,716259,83.9,54.0,97.1,91.3,64.4,census2011
+Latehar,Jharkhand,23.7178,84.4432,726978,79.2,51.4,89.0,70.3,60.5,census2011
+Lohardaga,Jharkhand,23.4757,84.67,461790,78.4,67.7,99.2,84.1,65.6,census2011
+Pakur,Jharkhand,24.5633,87.6641,900422,88.6,38.3,91.7,64.6,53.1,census2011
+Palamu,Jharkhand,24.2024,84.1674,1939869,94.9,46.3,95.8,74.9,63.5,census2011
+Pashchimi Singhbhum,Jharkhand,22.4197,85.5196,1502338,79.3,37.7,83.3,67.9,58.4,census2011
+Purbi Singhbhum,Jharkhand,22.5826,86.4527,2293919,89.7,70.2,95.7,94.0,74.1,census2011
+Ramgarh,Jharkhand,23.6307,85.5606,949443,76.7,64.2,98.4,79.0,68.4,census2011
+Ranchi,Jharkhand,23.3313,85.3708,2914253,86.3,77.2,99.3,87.3,73.3,census2011
+Sahibganj,Jharkhand,25.0081,87.6796,1150567,88.2,43.2,91.6,64.7,57.3,census2011
+Saraikela-Kharsawan,Jharkhand,22.8449,85.9516,1065056,85.7,60.9,93.5,81.8,64.4,census2011
+Simdega,Jharkhand,22.5801,84.5664,599578,66.7,71.3,84.1,75.7,68.2,census2011
+Bagalkot,Karnataka,16.2205,75.6254,1889752,99.2,51.3,98.9,95.2,67.3,census2011
+Bangalore,Karnataka,12.9508,77.5959,9621551,99.2,90.4,98.8,99.3,85.7,census2011
+Bangalore Rural,Karnataka,13.2257,77.575,990923,97.9,88.8,99.2,100.0,74.3,census2011
+Belgaum,Karnataka,16.1194,74.823,4779661,94.4,67.7,99.1,97.5,72.4,census2011
+Bellary,Karnataka,15.1096,76.5334,2452595,94.7,64.1,98.9,95.7,64.2,census2011
+Bidar,Karnataka,17.9528,77.2265,1703300,98.9,56.5,98.8,99.0,68.2,census2011
+Bijapur,Karnataka,16.7937,75.9531,2177331,92.5,44.8,97.6,91.8,66.1,census2011
+Chamarajanagar,Karnataka,11.9569,77.0998,1020791,99.9,75.2,98.7,100.0,63.2,census2011
+Chikkaballapura,Karnataka,13.5782,77.8362,1255104,98.1,84.9,99.9,99.0,65.9,census2011
+Chikmagalur,Karnataka,13.4543,75.6913,1137961,95.7,92.3,99.3,98.4,76.2,census2011
+Chitradurga,Karnataka,14.1675,76.5164,1659456,97.8,63.1,99.8,98.3,73.0,census2011
+Dakshina Kannada,Karnataka,12.8382,75.2667,2089649,88.6,97.1,99.8,100.0,83.9,census2011
+Davanagere,Karnataka,14.408,75.9548,1945497,97.5,83.3,98.8,98.3,74.9,census2011
+Dharwad,Karnataka,15.3894,75.1538,1847023,87.9,79.3,99.4,99.7,78.2,census2011
+Gadag,Karnataka,15.4311,75.6663,1064570,95.5,55.2,98.6,96.2,73.3,census2011
+Gulbarga,Karnataka,17.2602,76.8695,2566326,92.5,36.5,99.4,88.7,65.0,census2011
+Hassan,Karnataka,12.9954,76.1091,1776421,96.8,87.9,99.3,100.0,74.4,census2011
+Haveri,Karnataka,14.7381,75.4177,1597668,99.1,68.9,99.1,97.2,72.6,census2011
+Kodagu,Karnataka,12.3244,75.8033,554519,89.2,93.9,98.7,98.4,83.6,census2011
+Kolar,Karnataka,13.1393,78.2177,1536401,98.5,89.2,99.5,99.6,71.6,census2011
+Koppal,Karnataka,15.5617,76.2219,1389920,96.0,58.8,99.2,90.7,63.9,census2011
+Mandya,Karnataka,12.6104,76.798,1805769,98.4,86.7,98.4,99.5,67.7,census2011
+Mysore,Karnataka,12.2088,76.4421,3001127,95.4,86.4,99.5,100.0,72.4,census2011
+Raichur,Karnataka,16.0895,76.8931,1928812,94.0,53.0,99.7,88.9,55.3,census2011
+Ramanagara,Karnataka,12.6785,77.3365,1082636,98.3,89.6,99.6,100.0,68.8,census2011
+Shimoga,Karnataka,14.0436,75.2207,1752753,94.6,85.4,99.5,99.7,78.8,census2011
+Tumkur,Karnataka,13.5202,76.9477,2678980,96.2,86.1,99.6,100.0,72.3,census2011
+Udupi,Karnataka,13.4667,74.8835,1177361,81.5,94.5,99.6,98.9,82.0,census2011
+Uttara Kannada,Karnataka,14.7941,74.6229,1437169,84.8,89.6,99.1,99.3,81.1,census2011
+Yadgir,Karnataka,16.6264,76.9136,1174271,95.2,37.4,99.0,93.3,51.9,census2011
+Alappuzha,Kerala,9.4236,76.4496,2127789,98.4,99.2,99.9,99.4,97.8,census2011
+Ernakulam,Kerala,10.0577,76.4727,3282388,98.2,99.3,100.0,99.1,97.2,census2011
+Idukki,Kerala,9.8822,77.0275,1108974,82.3,97.5,99.0,100.0,93.0,census2011
+Kannur,Kerala,12.0006,75.5262,2523003,93.9,99.5,99.7,100.0,96.7,census2011
+Kasaragod,Kerala,12.4628,75.1537,1307375,93.2,98.9,99.5,100.0,90.8,census2011
+Kollam,Kerala,8.961,76.8749,2635375,95.7,97.5,99.8,100.0,96.6,census2011
+Kottayam,Kerala,9.6371,76.6509,1974551,97.1,98.6,99.6,98.7,97.9,census2011
+Kozhikode,Kerala,11.4848,75.8344,3086293,93.3,99.6,99.6,100.0,97.7,census2011
+Malappuram,Kerala,11.1321,76.1558,4112920,97.7,99.9,99.7,100.0,94.9,census2011
+Palakkad,Kerala,10.7946,76.5586,2809934,94.7,99.0,98.9,100.0,89.6,census2011
+Pathanamthitta,Kerala,9.2841,76.929,1197412,94.1,98.9,99.6,99.1,97.7,census2011
+Thiruvananthapuram,Kerala,8.6085,77.015,3301427,92.9,95.4,99.9,99.5,94.5,census2011
+Thrissur,Kerala,10.4712,76.3162,3121200,93.7,99.5,100.0,100.0,97.8,census2011
+Wayanad,Kerala,11.7112,76.0981,817420,94.1,97.6,97.0,100.0,88.2,census2011
+Kargil,Ladakh,33.9666,76.4845,140802,90.2,42.3,99.1,93.7,69.6,census2011
+Leh(Ladakh),Ladakh,34.3388,78.4359,133487,87.1,42.4,99.8,96.4,66.3,census2011
+Agar Malwa,Madhya Pradesh,23.9351,76.145,,81.4,72.3,99.5,98.9,56.3,created after 2011 (no Census 2011 population)
+Alirajpur,Madhya Pradesh,22.3138,74.3645,728999,89.6,84.7,98.5,83.2,45.4,census2011
+Anuppur,Madhya Pradesh,23.0567,81.684,749237,79.8,69.4,97.0,84.8,65.0,census2011
+Ashoknagar,Madhya Pradesh,24.6094,77.8752,845071,90.1,53.7,98.6,91.3,62.4,census2011
+Balaghat,Madhya Pradesh,21.8808,80.3606,1701698,83.3,79.6,98.7,95.1,72.8,census2011
+Barwani,Madhya Pradesh,21.7874,75.0213,1385881,90.4,61.0,99.3,85.1,54.1,census2011
+Betul,Madhya Pradesh,21.878,77.871,1575362,87.1,59.8,98.1,87.6,71.2,census2011
+Bhind,Madhya Pradesh,26.4211,78.7226,1703005,95.5,79.9,98.2,93.5,66.9,census2011
+Bhopal,Madhya Pradesh,23.478,77.3961,2371061,96.7,79.6,99.6,98.3,78.3,census2011
+Burhanpur,Madhya Pradesh,21.3721,76.3702,757847,96.0,74.0,98.3,90.7,69.8,census2011
+Chhatarpur,Madhya Pradesh,24.7967,79.6661,1762375,86.5,55.5,96.8,85.2,65.1,census2011
+Chhindwara,Madhya Pradesh,22.1214,78.8555,2090922,89.1,77.1,98.9,92.2,73.1,census2011
+Damoh,Madhya Pradesh,23.8128,79.5273,1264219,81.0,40.6,97.3,85.0,70.3,census2011
+Datia,Madhya Pradesh,25.8505,78.5688,786754,95.8,66.8,99.8,89.4,67.4,census2011
+Dewas,Madhya Pradesh,22.7451,76.4564,1563715,93.6,69.6,99.6,92.2,68.6,census2011
+Dhar,Madhya Pradesh,22.4974,75.1041,2185793,89.2,61.9,97.6,95.5,59.5,census2011
+Dindori,Madhya Pradesh,22.8889,81.0561,704524,66.1,47.9,97.4,77.6,64.8,census2011
+Guna,Madhya Pradesh,24.5546,77.2008,1241519,81.4,55.6,98.3,98.0,61.4,census2011
+Gwalior,Madhya Pradesh,26.0114,78.2196,2032036,98.6,83.2,99.5,94.8,72.2,census2011
+Harda,Madhya Pradesh,22.2342,77.1211,570465,92.3,68.8,98.8,88.4,74.1,census2011
+Hoshangabad,Madhya Pradesh,22.5883,77.9889,1241350,93.5,68.5,97.2,91.8,74.0,census2011
+Indore,Madhya Pradesh,22.7131,75.7822,3276697,98.9,90.0,100.0,96.5,78.0,census2011
+Jabalpur,Madhya Pradesh,23.2326,79.9765,2463289,98.0,61.9,99.7,94.7,70.0,census2011
+Jhabua,Madhya Pradesh,22.8906,74.6718,1025048,85.2,57.6,98.9,92.9,45.9,census2011
+Katni,Madhya Pradesh,23.7542,80.4015,1292042,94.0,53.5,97.9,91.8,71.4,census2011
+Khandwa (East Nimar),Madhya Pradesh,21.9362,76.5714,1310061,88.7,76.7,99.3,93.2,67.1,census2011
+Khargone (West Nimar),Madhya Pradesh,21.9205,75.7745,1873046,97.0,73.8,98.8,92.8,62.1,census2011
+Mandla,Madhya Pradesh,22.6404,80.5134,1054905,79.7,58.4,96.8,87.6,68.3,census2011
+Mandsaur,Madhya Pradesh,24.2113,75.4055,1340411,77.6,65.4,99.9,99.4,63.1,census2011
+Morena,Madhya Pradesh,26.4138,77.8688,1965970,97.1,62.7,99.5,94.8,67.0,census2011
+Narsimhapur,Madhya Pradesh,22.9346,79.0873,1091854,99.8,77.0,99.0,91.4,73.8,census2011
+Neemuch,Madhya Pradesh,24.6056,75.1446,826067,91.7,68.9,99.6,97.5,64.1,census2011
+Panna,Madhya Pradesh,24.4205,80.1917,1016520,85.5,43.8,95.8,84.0,63.7,census2011
+Raisen,Madhya Pradesh,23.2171,78.1184,1331597,92.4,69.6,99.3,96.0,73.3,census2011
+Rajgarh,Madhya Pradesh,23.8612,76.7346,1545814,74.2,47.8,97.8,91.7,58.9,census2011
+Ratlam,Madhya Pradesh,23.501,75.0901,1455069,91.0,69.4,99.0,95.2,66.2,census2011
+Rewa,Madhya Pradesh,24.7552,81.5896,2365106,82.1,46.1,96.5,80.4,65.2,census2011
+Sagar,Madhya Pradesh,23.848,78.7589,2378458,86.7,68.8,98.6,86.9,76.4,census2011
+Satna,Madhya Pradesh,24.5327,80.8333,2228935,92.7,55.4,97.8,85.5,71.9,census2011
+Sehore,Madhya Pradesh,22.9912,77.1286,1311332,92.2,75.2,99.2,94.7,68.5,census2011
+Seoni,Madhya Pradesh,22.3157,79.6902,1379131,79.1,56.2,99.2,94.8,71.3,census2011
+Shahdol,Madhya Pradesh,23.629,81.4728,1066063,79.2,61.4,97.5,85.6,67.2,census2011
+Shajapur,Madhya Pradesh,23.5797,76.3457,1512681,91.8,74.5,99.9,98.1,62.6,census2011
+Sheopur,Madhya Pradesh,25.7525,77.0104,687861,91.1,48.0,98.0,84.2,53.1,census2011
+Shivpuri,Madhya Pradesh,25.3627,77.8125,1726050,86.8,55.5,97.2,94.5,61.4,census2011
+Sidhi,Madhya Pradesh,24.2198,81.8353,1127033,83.7,44.7,96.4,83.8,66.7,census2011
+Singrauli,Madhya Pradesh,24.2167,82.4207,1178273,77.9,52.6,92.7,69.9,60.9,census2011
+Tikamgarh,Madhya Pradesh,24.9883,78.9467,1445166,80.0,56.6,99.7,89.8,66.8,census2011
+Ujjain,Madhya Pradesh,23.3317,75.6684,1986864,94.7,72.8,99.3,97.1,68.9,census2011
+Umaria,Madhya Pradesh,23.5644,80.9719,644758,79.5,53.7,98.2,92.2,68.0,census2011
+Vidisha,Madhya Pradesh,23.8927,77.8134,1458875,95.7,65.2,98.7,90.6,69.2,census2011
+Ahmadnagar,Maharashtra,19.2035,74.6769,4543159,90.0,79.5,94.5,97.9,77.4,census2011
+Akola,Maharashtra,20.7489,77.0533,1813906,95.1,69.5,97.6,97.7,86.3,census2011
+Amravati,Maharashtra,21.1878,77.572,2888445,95.8,75.7,99.1,91.3,86.2,census2011
+Aurangabad,Maharashtra,20.0215,75.2735,3701282,91.7,69.1,97.0,94.8,78.4,census2011
+Bhandara,Maharashtra,21.1292,79.7509,1200334,92.0,81.8,98.8,100.0,80.3,census2011
+Bid,Maharashtra,18.9304,75.8697,2585049,85.4,66.4,94.8,94.0,64.6,census2011
+Buldana,Maharashtra,20.5111,76.4083,2586258,89.7,68.9,97.1,93.9,78.1,census2011
+Chandrapur,Maharashtra,20.1179,79.4438,2204307,96.5,77.3,98.9,99.6,78.9,census2011
+Dhule,Maharashtra,21.1099,74.6011,2050862,89.9,58.9,96.0,77.2,73.5,census2011
+Gadchiroli,Maharashtra,19.7849,80.2411,1072942,83.0,62.4,95.8,97.3,67.1,census2011
+Gondiya,Maharashtra,21.149,80.2054,1322507,91.6,74.3,98.2,99.1,80.4,census2011
+Hingoli,Maharashtra,19.6152,77.1189,1177345,92.4,69.0,98.1,94.0,69.4,census2011
+Jalgaon,Maharashtra,20.9355,75.4899,4229917,94.3,59.7,96.8,86.5,77.5,census2011
+Jalna,Maharashtra,19.8182,75.9819,1959046,82.8,63.6,95.7,92.8,67.6,census2011
+Kolhapur,Maharashtra,16.4697,74.1598,3876001,97.3,82.0,98.8,99.2,80.2,census2011
+Latur,Maharashtra,18.3605,76.7751,2454196,94.6,72.5,97.2,94.7,70.6,census2011
+Mumbai,Maharashtra,18.9596,72.8496,3085411,100.0,58.6,99.6,99.5,92.5,census2011
+Mumbai Suburban,Maharashtra,19.1296,72.8851,9356962,99.8,62.6,99.2,98.1,88.5,census2011
+Nagpur,Maharashtra,21.1763,79.0876,4653570,99.5,88.9,99.5,100.0,86.5,census2011
+Nanded,Maharashtra,19.1159,77.624,3361292,94.8,68.0,96.4,94.8,68.1,census2011
+Nandurbar,Maharashtra,21.5496,74.2187,1648295,94.6,54.1,96.2,76.3,63.5,census2011
+Nashik,Maharashtra,20.2592,74.0714,6107187,86.3,68.3,95.3,90.5,78.2,census2011
+Osmanabad,Maharashtra,18.1891,76.0388,1657576,96.4,71.2,96.8,98.1,71.3,census2011
+Palghar,Maharashtra,19.7572,73.0931,,91.1,75.1,97.7,94.2,77.5,created after 2011 (no Census 2011 population)
+Parbhani,Maharashtra,19.2857,76.6828,1836086,89.0,60.1,96.8,85.6,67.1,census2011
+Pune,Maharashtra,18.5709,74.0691,9429408,96.9,79.6,99.4,98.0,84.8,census2011
+Raigarh,Maharashtra,18.5172,73.2148,2634200,87.8,74.8,97.9,96.6,73.7,census2011
+Ratnagiri,Maharashtra,17.2737,73.4568,1615069,90.9,85.6,99.2,97.8,80.3,census2011
+Sangli,Maharashtra,17.112,74.7699,2822143,96.8,84.7,98.2,98.0,80.4,census2011
+Satara,Maharashtra,17.6686,74.1738,3003741,95.6,78.7,97.9,97.1,78.5,census2011
+Sindhudurg,Maharashtra,16.1343,73.7399,849651,73.2,87.9,99.4,100.0,83.1,census2011
+Solapur,Maharashtra,17.7898,75.4829,4317756,90.4,67.8,97.1,96.2,72.0,census2011
+Thane,Maharashtra,19.5992,73.1509,11060148,96.7,74.7,99.3,93.6,86.1,census2011
+Wardha,Maharashtra,20.7958,78.5876,1300774,98.5,80.2,98.8,98.8,85.1,census2011
+Washim,Maharashtra,20.2376,77.219,1197160,73.7,61.5,97.2,92.9,76.0,census2011
+Yavatmal,Maharashtra,20.0839,78.1622,2772348,89.5,66.4,97.2,96.3,77.6,census2011
+Bishnupur,Manipur,24.5352,93.8011,237399,77.7,52.6,98.6,89.5,81.5,census2011
+Chandel,Manipur,24.2355,94.0932,144182,68.6,85.2,99.9,55.5,76.9,census2011
+Churachandpur,Manipur,24.2898,93.4269,274143,62.5,81.2,94.0,72.9,84.0,census2011
+Imphal East,Manipur,24.8166,93.9421,456113,90.2,59.5,98.6,91.7,87.2,census2011
+Imphal West,Manipur,24.6816,93.1544,517992,89.1,58.7,99.4,95.7,89.0,census2011
+Senapati,Manipur,25.1965,94.0402,479148,64.4,84.4,98.8,45.8,79.6,census2011
+Tamenglong,Manipur,24.9473,93.5273,140651,51.6,77.9,93.6,57.7,78.4,census2011
+Thoubal,Manipur,24.5308,93.9716,422168,72.5,61.3,98.6,87.8,79.9,census2011
+Ukhrul,Manipur,25.0203,94.434,183998,50.9,81.4,95.0,44.6,83.7,census2011
+East Garo Hills,Meghalaya,25.7352,90.6342,317917,67.0,83.9,97.4,73.8,90.9,census2011
+East Jantia Hills,Meghalaya,25.2516,92.4841,,74.6,83.6,85.1,48.4,76.0,created after 2011 (no Census 2011 population)
+East Khasi Hills,Meghalaya,25.3804,91.8007,825922,90.0,80.9,96.6,63.4,88.7,census2011
+North Garo Hills,Meghalaya,25.862,90.7018,,51.5,84.9,97.5,61.5,91.3,created after 2011 (no Census 2011 population)
+Ribhoi,Meghalaya,25.8704,91.891,258840,86.2,85.3,92.1,56.9,85.3,census2011
+South Garo Hills,Meghalaya,25.3016,90.5853,142334,60.4,88.4,98.6,88.3,89.2,census2011
+South West Garo Hills,Meghalaya,25.4446,89.997,,58.6,71.4,95.5,83.7,81.7,created after 2011 (no Census 2011 population)
+South West Khasi Hills,Meghalaya,25.3307,91.3217,,85.3,89.6,87.9,41.7,84.6,created after 2011 (no Census 2011 population)
+West Garo Hills,Meghalaya,25.585,90.1448,643291,83.7,86.3,94.7,89.6,88.7,census2011
+West Jaintia Hills,Meghalaya,25.4426,92.2988,,70.6,75.1,75.4,42.2,73.8,created after 2011 (no Census 2011 population)
+West Khasi Hills,Meghalaya,25.5265,91.2608,383461,80.5,87.8,85.0,41.7,85.1,census2011
+Aizawl,Mizoram,23.8106,92.8891,400309,98.3,96.1,99.7,97.4,97.8,census2011
+Champhai,Mizoram,23.5294,93.24,125745,98.6,98.3,100.0,96.7,93.3,census2011
+Kolasib,Mizoram,24.198,92.7269,83955,95.3,96.8,99.1,91.4,93.9,census2011
+Lawngtlai,Mizoram,22.3836,92.7132,117894,82.2,90.3,89.0,53.7,79.9,census2011
+Lunglei,Mizoram,22.9719,92.7226,161428,96.0,95.6,98.0,82.7,89.8,census2011
+Mamit,Mizoram,23.754,92.4672,86364,97.3,92.7,97.9,75.0,90.7,census2011
+Saiha,Mizoram,22.3767,93.0122,56574,95.2,91.5,99.7,73.8,92.2,census2011
+Serchhip,Mizoram,23.266,92.9592,64937,97.7,98.2,99.3,96.2,96.8,census2011
+Central,Delhi,28.6431,77.2197,582320,99.7,77.0,99.8,92.2,84.4,census2011
+East,Delhi,28.6292,77.298,1709346,98.4,78.0,99.5,92.6,84.4,census2011
+New Delhi,Delhi,28.6109,77.214,142004,99.1,69.4,100.0,91.8,85.9,census2011
+North,Delhi,28.7106,77.2115,887978,98.2,89.5,99.9,89.2,82.7,census2011
+North East,Delhi,28.7077,77.274,2241624,99.7,88.2,100.0,94.0,84.2,census2011
+North West,Delhi,28.7688,77.0869,3656539,99.3,70.2,99.8,89.7,80.8,census2011
+Shahdara,Delhi,28.6436,77.3246,,99.8,83.4,99.9,95.8,83.1,created after 2011 (no Census 2011 population)
+South,Delhi,28.5014,77.2274,2731929,100.0,83.8,99.7,96.1,83.9,census2011
+South East,Delhi,28.5658,77.2571,,99.7,86.2,100.0,92.5,86.6,created after 2011 (no Census 2011 population)
+South West,Delhi,28.5724,77.0274,2292958,100.0,89.5,99.9,82.0,83.5,census2011
+West,Delhi,28.6553,77.0657,2543243,99.8,76.8,100.0,91.8,83.3,census2011
+Dimapur,Nagaland,25.7785,93.7851,378811,92.4,81.1,99.8,73.7,89.8,census2011
+Kiphire,Nagaland,25.8449,94.8251,74004,90.9,83.1,97.9,34.8,77.4,census2011
+Kohima,Nagaland,25.781,94.1291,267988,89.9,87.4,99.5,66.9,90.4,census2011
+Longleng,Nagaland,26.5554,94.8003,50484,76.3,86.6,99.1,38.7,81.2,census2011
+Mokokchung,Nagaland,26.472,94.5318,194622,97.4,96.7,97.7,51.5,88.0,census2011
+Mon,Nagaland,26.7312,95.0217,250260,86.7,86.4,96.4,21.4,79.4,census2011
+Peren,Nagaland,25.4996,93.6235,95219,92.5,89.4,98.2,43.5,81.1,census2011
+Phek,Nagaland,25.6608,94.5255,163418,98.1,90.1,99.4,32.2,80.5,census2011
+Tuensang,Nagaland,26.2002,94.9058,196596,90.4,92.0,96.6,34.8,80.5,census2011
+Wokha,Nagaland,26.1849,94.1926,166343,83.4,88.5,99.7,43.6,85.8,census2011
+Zunheboto,Nagaland,26.0316,94.5253,140757,91.0,88.9,99.4,35.0,87.4,census2011
+Anugul,Odisha,20.9864,84.909,1273821,76.2,66.4,96.7,85.7,73.2,census2011
+Balangir,Odisha,20.5905,83.1739,1648997,92.9,66.3,97.8,97.9,69.3,census2011
+Baleshwar,Odisha,21.4898,86.917,2320529,98.5,70.9,97.1,97.6,77.1,census2011
+Bargarh,Odisha,21.2202,83.3534,1481255,98.0,61.9,98.4,99.6,72.1,census2011
+Baudh,Odisha,20.8405,84.3215,,92.5,52.9,96.3,93.4,68.6,created after 2011 (no Census 2011 population)
+Bhadrak,Odisha,20.9859,86.6254,1506337,100.0,62.0,97.8,96.1,81.2,census2011
+Cuttack,Odisha,20.4496,85.7057,2624470,92.3,60.2,98.2,98.9,80.6,census2011
+Debagarh,Odisha,21.4659,84.8037,312520,86.2,69.9,95.3,91.2,71.8,census2011
+Dhenkanal,Odisha,20.8262,85.5262,1192811,63.4,58.2,96.3,94.8,76.2,census2011
+Gajapati,Odisha,19.1734,84.1607,577817,78.1,58.3,94.1,76.4,55.5,census2011
+Ganjam,Odisha,19.6269,84.6711,3529031,89.6,72.9,99.3,93.0,68.6,census2011
+Jagatsinghapur,Odisha,20.2218,86.3437,1136971,99.5,60.1,98.2,98.3,84.7,census2011
+Jajapur,Odisha,20.8559,86.1522,1827192,92.0,47.4,97.0,93.8,78.7,census2011
+Jharsuguda,Odisha,21.806,83.9547,579505,88.4,70.0,98.1,98.6,77.8,census2011
+Kalahandi,Odisha,19.8677,83.1092,1576869,96.5,64.4,97.2,92.8,62.5,census2011
+Kandhamal,Odisha,20.1289,84.0472,733110,64.4,52.4,96.6,93.9,64.2,census2011
+Kendrapara,Odisha,20.5531,86.6097,1440361,99.7,57.3,99.5,96.7,84.3,census2011
+Kendujhar,Odisha,21.5371,85.7051,1801733,92.9,47.6,91.1,80.4,68.2,census2011
+Khordha,Odisha,20.09,85.5114,2251673,94.6,73.2,99.5,97.8,84.4,census2011
+Koraput,Odisha,18.8165,82.7213,1379647,89.5,39.4,96.2,82.1,50.6,census2011
+Malkangiri,Odisha,18.2581,81.9563,613192,94.7,41.4,95.8,90.7,48.9,census2011
+Mayurbhanj,Odisha,21.8952,86.4112,2519738,80.1,54.4,90.3,91.7,63.0,census2011
+Nabarangapur,Odisha,19.588,82.3377,1220946,99.1,44.1,97.4,87.6,52.9,census2011
+Nayagarh,Odisha,20.2131,84.9994,962789,82.9,67.1,98.3,98.3,76.1,census2011
+Nuapada,Odisha,20.4657,82.5783,610382,97.5,58.4,94.6,89.8,60.9,census2011
+Puri,Odisha,19.8765,85.7209,1698730,98.5,67.3,99.5,97.7,83.3,census2011
+Rayagada,Odisha,19.3623,83.5138,967911,91.3,50.5,96.6,68.9,50.8,census2011
+Sambalpur,Odisha,21.4519,84.2809,1041099,93.0,62.4,98.8,99.5,74.6,census2011
+Subarnapur,Odisha,20.9315,83.8249,610183,94.2,66.7,98.7,96.1,74.4,census2011
+Sundargarh,Odisha,22.0798,84.5106,2093437,91.5,65.5,97.1,91.3,72.0,census2011
+Karaikal,Puducherry,10.9344,79.8021,200222,99.9,84.3,99.6,99.6,86.3,census2011
+Mahe,Puducherry,11.7267,75.5415,41816,98.0,99.8,99.7,100.0,99.2,census2011
+Puducherry,Puducherry,11.9121,79.733,950289,100.0,84.6,100.0,99.5,83.8,census2011
+Yanam,Puducherry,16.7266,82.2546,55626,100.0,84.1,99.8,100.0,80.9,census2011
+Amritsar,Punjab,31.7046,74.9007,2490656,99.6,86.0,99.9,95.9,78.0,census2011
+Barnala,Punjab,30.3972,75.5048,595527,99.8,90.7,99.8,96.7,72.4,census2011
+Bathinda,Punjab,30.1828,75.0407,1388525,99.1,88.4,100.0,93.1,68.7,census2011
+Faridkot,Punjab,30.6109,74.7792,617508,92.5,87.5,99.0,94.3,71.7,census2011
+Fatehgarh Sahib,Punjab,30.6322,76.3653,600163,99.7,87.6,99.6,96.6,80.1,census2011
+Fazilka,Punjab,30.3198,74.1218,,97.3,81.8,99.8,91.7,70.8,created after 2011 (no Census 2011 population)
+Firozpur,Punjab,30.5605,74.4009,2029074,95.6,84.8,99.6,95.5,72.5,census2011
+Gurdaspur,Punjab,32.0242,75.3864,2298323,97.6,85.4,99.1,92.4,79.0,census2011
+Hoshiarpur,Punjab,31.626,75.8588,1586625,99.9,89.7,99.9,98.3,89.0,census2011
+Jalandhar,Punjab,31.2126,75.5666,2193590,99.9,88.2,99.6,92.3,82.1,census2011
+Kapurthala,Punjab,31.3541,75.4031,815168,99.4,87.7,99.8,95.0,79.2,census2011
+Ludhiana,Punjab,30.8087,75.8382,3498739,99.9,84.6,99.7,90.1,81.4,census2011
+Mansa,Punjab,29.9084,75.4389,769751,99.3,85.4,99.5,88.8,63.6,census2011
+Moga,Punjab,30.77,75.168,995746,99.2,87.8,99.9,93.0,72.0,census2011
+Muktsar,Punjab,30.2946,74.541,901896,97.8,82.9,99.5,96.4,68.5,census2011
+Pathankot,Punjab,32.3022,75.6589,,98.6,79.2,99.9,94.8,82.8,created after 2011 (no Census 2011 population)
+Patiala,Punjab,30.2815,76.354,1895686,99.1,88.1,99.7,97.3,76.9,census2011
+Rupnagar,Punjab,31.0594,76.4864,684627,98.5,84.0,99.8,97.8,81.8,census2011
+Sahibzada Ajit Singh Nagar,Punjab,30.6809,76.7378,994628,99.9,87.6,99.6,97.4,84.3,census2011
+Sangrur,Punjab,30.2135,75.8686,1655169,99.7,92.4,99.6,94.7,73.5,census2011
+Shahid Bhagat Singh Nagar,Punjab,31.1091,76.156,612310,99.7,91.3,100.0,99.3,82.3,census2011
+Tarn Taran,Punjab,31.3373,74.8446,1119627,95.6,82.0,99.7,96.0,68.6,census2011
+Ajmer,Rajasthan,26.2299,74.7752,2583052,98.1,77.5,99.9,95.1,67.3,census2011
+Alwar,Rajasthan,27.5915,76.606,3674179,97.6,66.0,97.8,91.3,64.0,census2011
+Banswara,Rajasthan,23.4752,74.3639,1797485,95.6,40.8,93.1,97.7,55.9,census2011
+Baran,Rajasthan,24.9952,76.7566,1222755,96.1,59.0,98.3,97.3,61.7,census2011
+Barmer,Rajasthan,25.7356,71.4733,2603751,99.9,83.6,95.5,93.3,67.0,census2011
+Bharatpur,Rajasthan,27.2457,77.2788,2548462,93.9,62.7,98.3,92.1,62.4,census2011
+Bhilwara,Rajasthan,25.48,74.7291,2408523,93.1,62.3,99.3,95.0,57.1,census2011
+Bikaner,Rajasthan,28.1777,73.1774,2363937,94.9,79.8,96.1,90.0,64.6,census2011
+Bundi,Rajasthan,25.47,75.7775,1110906,95.7,56.3,98.4,95.3,57.9,census2011
+Chittaurgarh,Rajasthan,24.8287,74.7798,1544338,97.6,63.8,99.0,96.8,55.3,census2011
+Churu,Rajasthan,28.3455,74.6985,2039547,98.2,80.2,96.6,87.8,62.9,census2011
+Dausa,Rajasthan,26.8561,76.5139,1634409,99.4,59.4,99.0,98.2,59.4,census2011
+Dhaulpur,Rajasthan,26.6808,77.7033,1206516,94.8,57.5,97.5,94.4,63.2,census2011
+Dungarpur,Rajasthan,23.7325,73.8551,1388552,94.1,59.9,99.4,94.1,64.6,census2011
+Ganganagar,Rajasthan,29.3955,73.5632,1969168,94.4,83.4,96.9,97.7,68.6,census2011
+Hanumangarh,Rajasthan,29.2714,74.549,1774692,97.8,83.8,99.0,94.9,65.1,census2011
+Jaipur,Rajasthan,26.9805,75.7243,6626178,99.9,79.6,99.5,97.3,68.1,census2011
+Jaisalmer,Rajasthan,27.0774,70.9034,669919,95.2,75.7,97.3,90.0,61.7,census2011
+Jalor,Rajasthan,25.0978,72.2119,1828730,98.3,77.4,98.4,95.5,59.5,census2011
+Jhalawar,Rajasthan,24.3289,76.1968,1411129,92.4,62.1,99.3,98.3,55.6,census2011
+Jhunjhunun,Rajasthan,28.0919,75.5524,2137045,98.4,79.0,99.0,97.1,66.8,census2011
+Jodhpur,Rajasthan,26.7508,72.788,3687165,96.5,75.4,98.4,90.0,64.8,census2011
+Karauli,Rajasthan,26.5207,76.9639,1458248,94.8,49.9,98.7,97.6,56.5,census2011
+Kota,Rajasthan,25.1241,76.1293,1951014,99.6,79.0,99.4,97.9,74.7,census2011
+Nagaur,Rajasthan,27.064,74.1879,3307743,96.9,79.0,99.0,97.0,62.9,census2011
+Pali,Rajasthan,25.7079,73.5206,2037573,96.2,81.8,99.7,98.8,67.1,census2011
+Pratapgarh,Rajasthan,24.0294,74.681,867848,88.6,46.3,97.0,96.4,57.0,census2011
+Rajsamand,Rajasthan,25.2163,73.8923,1156597,94.8,72.1,98.9,95.1,64.2,census2011
+Sawai Madhopur,Rajasthan,26.2169,76.4679,1335551,92.5,71.2,95.5,97.4,57.4,census2011
+Sikar,Rajasthan,27.6366,75.2875,2677333,99.4,77.9,99.2,95.8,67.9,census2011
+Sirohi,Rajasthan,24.7589,72.7743,1036346,93.6,54.1,93.9,95.7,59.4,census2011
+Tonk,Rajasthan,26.1458,75.6719,1421326,90.9,66.2,97.8,97.4,54.8,census2011
+Udaipur,Rajasthan,24.4077,73.7064,3068420,92.7,60.3,98.1,96.1,63.8,census2011
+East District,Sikkim,27.2928,88.678,283583,93.6,85.0,99.4,91.8,86.4,census2011
+North District,Sikkim,27.7434,88.5324,43709,94.7,83.8,98.9,97.3,78.5,census2011
+South District,Sikkim,27.2868,88.3879,146850,93.3,91.7,99.6,97.4,80.2,census2011
+West District,Sikkim,27.3491,88.1779,136435,89.9,88.9,98.8,99.3,81.8,census2011
+Ariyalur,Tamil Nadu,11.1605,79.2442,754894,93.2,54.6,98.2,100.0,73.5,census2011
+Chennai,Tamil Nadu,13.0647,80.2523,4646732,98.7,90.4,99.9,100.0,92.7,census2011
+Coimbatore,Tamil Nadu,10.8745,76.9756,3458045,99.9,78.5,99.4,100.0,84.2,census2011
+Cuddalore,Tamil Nadu,11.535,79.4509,2605914,99.5,61.3,99.2,99.2,76.8,census2011
+Dharmapuri,Tamil Nadu,12.0969,78.1958,1506843,98.7,72.4,99.4,99.6,72.6,census2011
+Dindigul,Tamil Nadu,10.3898,77.82,2159775,99.5,61.0,98.8,97.0,77.8,census2011
+Erode,Tamil Nadu,11.5152,77.4143,2251744,98.9,67.6,99.6,100.0,73.1,census2011
+Kancheepuram,Tamil Nadu,12.6952,79.9479,3998252,99.4,75.9,99.4,100.0,85.0,census2011
+Kanniyakumari,Tamil Nadu,8.3069,77.3614,1870374,98.2,96.2,99.8,100.0,92.9,census2011
+Karur,Tamil Nadu,10.843,78.1331,1064493,99.4,63.6,98.7,100.0,73.2,census2011
+Krishnagiri,Tamil Nadu,12.489,78.0327,1879809,99.8,75.9,99.2,99.6,72.6,census2011
+Madurai,Tamil Nadu,9.921,78.0063,3038252,98.7,80.1,98.9,100.0,83.9,census2011
+Nagapattinam,Tamil Nadu,10.8494,79.7389,1616450,100.0,69.6,99.0,99.7,79.2,census2011
+Namakkal,Tamil Nadu,11.3163,78.1361,1726601,99.5,75.2,99.2,100.0,73.5,census2011
+Perambalur,Tamil Nadu,11.2733,78.893,565223,100.0,57.4,99.1,100.0,73.1,census2011
+Pudukkottai,Tamil Nadu,10.3586,78.8812,1618345,95.7,55.2,98.9,100.0,74.7,census2011
+Ramanathapuram,Tamil Nadu,9.4401,78.6733,1353445,93.9,78.6,99.3,99.6,80.3,census2011
+Salem,Tamil Nadu,11.6741,78.2221,3482056,97.6,64.5,99.5,100.0,74.4,census2011
+Sivaganga,Tamil Nadu,9.9151,78.5987,1339101,96.5,74.4,99.4,100.0,78.8,census2011
+Thanjavur,Tamil Nadu,10.6715,79.2413,2405890,99.7,79.6,98.8,100.0,80.6,census2011
+The Nilgiris,Tamil Nadu,11.4559,76.6419,735394,96.4,83.6,98.6,100.0,85.2,census2011
+Theni,Tamil Nadu,9.8902,77.4394,1245899,99.9,74.4,99.4,100.0,80.9,census2011
+Thiruvallur,Tamil Nadu,13.2431,79.94,3728104,100.0,75.6,99.8,100.0,83.5,census2011
+Thiruvarur,Tamil Nadu,10.6799,79.536,1264277,100.0,71.0,98.6,100.0,84.9,census2011
+Thoothukkudi,Tamil Nadu,8.8908,78.0044,1750176,97.0,79.4,100.0,100.0,86.6,census2011
+Tiruchirappalli,Tamil Nadu,10.8889,78.5704,2722290,98.1,67.1,99.0,98.6,80.7,census2011
+Tirunelveli,Tamil Nadu,8.7987,77.542,3077233,98.1,79.8,99.5,100.0,84.4,census2011
+Tiruppur,Tamil Nadu,10.8381,77.4054,2479052,99.8,75.9,99.5,100.0,75.8,census2011
+Tiruvannamalai,Tamil Nadu,12.4311,79.1677,2464875,98.5,61.7,99.0,99.1,75.5,census2011
+Vellore,Tamil Nadu,12.8123,79.0104,3936331,97.7,76.2,99.3,99.5,80.0,census2011
+Viluppuram,Tamil Nadu,11.9735,79.2921,3458873,98.4,53.8,99.7,99.1,73.6,census2011
+Virudhunagar,Tamil Nadu,9.484,77.9431,1942288,97.4,59.8,99.5,97.8,80.5,census2011
+Adilabad,Telangana,19.2565,78.9721,2741239,95.7,50.8,99.2,94.1,58.6,census2011
+Bhadradri Kothagudem,Telangana,17.7167,80.5713,,99.1,75.3,99.4,97.4,62.7,created after 2011 (no Census 2011 population)
+Hyderabad,Telangana,17.3898,78.4699,3943323,99.6,84.4,99.9,98.3,80.3,census2011
+Jagitial,Telangana,18.7909,78.9118,,97.3,76.5,99.3,94.4,55.9,created after 2011 (no Census 2011 population)
+Jangoan,Telangana,17.7198,79.1595,,99.4,84.3,99.3,99.6,56.6,created after 2011 (no Census 2011 population)
+Jayashankar Bhupalapally,Telangana,18.516,79.9694,,95.1,65.6,99.3,99.5,52.4,created after 2011 (no Census 2011 population)
+Jogulamba Gadwal,Telangana,16.0999,77.7342,,97.0,73.7,99.8,94.2,47.8,created after 2011 (no Census 2011 population)
+Kamareddy,Telangana,18.3166,78.0539,,99.4,68.2,99.5,97.1,51.1,created after 2011 (no Census 2011 population)
+Karimnagar,Telangana,18.5497,79.2409,3776269,98.3,78.8,99.7,98.4,63.6,census2011
+Khammam,Telangana,17.5969,80.6873,2797370,98.4,84.5,99.7,97.9,61.8,census2011
+Komaram Bheem Asifabad,Telangana,19.3614,79.2946,,93.6,54.0,97.8,82.0,52.9,created after 2011 (no Census 2011 population)
+Mahabubabad,Telangana,17.7139,80.0413,,98.2,68.6,99.6,97.7,55.0,created after 2011 (no Census 2011 population)
+Mahabubnagar,Telangana,16.4985,78.1461,4053028,99.6,73.7,99.4,98.1,54.8,census2011
+Mancherial,Telangana,18.9813,79.5198,,95.6,78.1,99.6,90.1,58.4,created after 2011 (no Census 2011 population)
+Medak,Telangana,17.888,78.2157,3033288,99.9,78.2,99.4,98.9,52.3,census2011
+Medchal-Malkajgiri,Telangana,17.535,78.5246,,99.9,86.2,100.0,98.3,72.9,created after 2011 (no Census 2011 population)
+Nagarkurnool,Telangana,16.4158,78.683,,99.6,73.2,99.9,98.0,51.1,created after 2011 (no Census 2011 population)
+Nalgonda,Telangana,17.0678,79.2887,3488809,99.2,76.4,99.9,98.3,59.8,census2011
+Nirmal,Telangana,19.0915,78.3966,,98.3,63.6,99.5,96.7,53.3,created after 2011 (no Census 2011 population)
+Nizamabad,Telangana,18.5261,78.1439,2551335,99.4,72.5,99.9,97.3,54.3,census2011
+Peddapalli,Telangana,18.6207,79.495,,98.0,77.8,99.5,96.5,61.3,created after 2011 (no Census 2011 population)
+Rajanna Sircilla,Telangana,18.4521,78.7646,,98.7,77.4,99.8,97.6,56.4,created after 2011 (no Census 2011 population)
+Ranga Reddy,Telangana,17.288,78.1774,5296741,99.4,81.1,99.7,97.2,68.6,census2011
+Sangareddy,Telangana,17.8684,77.8227,,99.4,68.0,99.6,93.0,60.2,created after 2011 (no Census 2011 population)
+Siddipet,Telangana,18.0056,78.8961,,97.2,84.1,99.5,99.7,60.8,created after 2011 (no Census 2011 population)
+Suryapet,Telangana,17.08,79.7925,,99.8,77.9,99.4,95.9,57.4,created after 2011 (no Census 2011 population)
+Vikarabad,Telangana,17.2703,77.7453,,99.7,66.7,99.1,95.0,53.1,created after 2011 (no Census 2011 population)
+Wanaparthy,Telangana,16.2853,77.9864,,99.4,75.9,99.2,99.0,49.3,created after 2011 (no Census 2011 population)
+Warangal Rural,Telangana,17.9846,79.5994,,99.0,74.3,99.7,100.0,51.8,created after 2011 (no Census 2011 population)
+Warangal Urban,Telangana,18.0458,79.6115,,99.1,81.2,99.6,99.7,70.3,created after 2011 (no Census 2011 population)
+Yadadri Bhuvanagiri,Telangana,17.4282,79.0905,,99.7,81.9,99.6,97.7,59.1,created after 2011 (no Census 2011 population)
+Dhalai,Tripura,23.8431,91.9259,378230,70.3,67.6,97.7,87.3,74.8,census2011
+Gomati,Tripura,23.4278,91.615,,87.7,77.4,98.8,93.2,80.1,created after 2011 (no Census 2011 population)
+Khowai,Tripura,23.9564,91.6421,,83.2,67.8,99.0,95.7,81.3,created after 2011 (no Census 2011 population)
+North Tripura,Tripura,24.1305,92.1555,693947,75.6,74.1,96.2,85.4,86.4,census2011
+Sepahijala,Tripura,23.6658,91.32,,97.4,75.4,99.0,87.7,78.9,created after 2011 (no Census 2011 population)
+South Tripura,Tripura,23.3685,91.6096,876001,90.5,68.6,95.9,89.7,80.4,census2011
+Unakoti,Tripura,24.191,92.046,,78.6,61.8,96.4,71.5,81.6,created after 2011 (no Census 2011 population)
+West Tripura,Tripura,23.8022,91.4649,1725739,98.5,80.2,99.8,95.3,85.3,census2011
+Agra,Uttar Pradesh,27.0377,78.0795,4418797,99.8,70.8,99.1,89.1,69.4,census2011
+Aligarh,Uttar Pradesh,27.9269,78.0793,3673889,100.0,69.4,95.3,82.6,68.0,census2011
+Ambedkar Nagar,Uttar Pradesh,26.4201,82.6685,2397888,100.0,63.6,94.2,92.2,71.6,census2011
+Amethi,Uttar Pradesh,26.3463,81.6252,,98.7,60.9,92.3,90.8,66.1,created after 2011 (no Census 2011 population)
+Auraiya,Uttar Pradesh,26.6607,79.4828,1379545,99.5,74.3,94.0,90.1,75.9,census2011
+Azamgarh,Uttar Pradesh,26.047,83.0697,4613913,100.0,72.8,96.5,93.2,71.2,census2011
+Baghpat,Uttar Pradesh,29.0553,77.3129,1303048,99.9,87.0,98.5,80.9,71.6,census2011
+Bahraich,Uttar Pradesh,27.7364,81.4519,3487731,100.0,44.2,77.8,67.7,48.2,census2011
+Ballia,Uttar Pradesh,25.8754,84.1055,3239774,99.8,61.7,89.1,90.0,68.1,census2011
+Balrampur,Uttar Pradesh,27.485,82.3776,2148665,99.8,59.7,78.4,69.7,53.1,census2011
+Banda,Uttar Pradesh,25.465,80.5618,1799410,98.2,59.3,89.2,89.8,61.8,census2011
+Bara Banki,Uttar Pradesh,26.9386,81.3274,3260699,98.8,62.4,74.8,76.0,65.1,census2011
+Bareilly,Uttar Pradesh,28.4494,79.4223,4448359,100.0,79.7,92.5,75.1,55.8,census2011
+Basti,Uttar Pradesh,26.8183,82.6311,2464464,100.0,64.2,94.6,93.2,64.4,census2011
+Bijnor,Uttar Pradesh,29.387,78.3988,3682713,99.7,78.2,96.1,83.7,69.6,census2011
+Budaun,Uttar Pradesh,28.1153,78.9454,3681896,99.8,69.7,80.7,72.3,54.9,census2011
+Bulandshahr,Uttar Pradesh,28.3576,78.0123,3499171,100.0,81.5,96.3,83.5,67.7,census2011
+Chandauli,Uttar Pradesh,25.1374,83.2611,1952756,97.5,66.7,91.9,86.2,68.8,census2011
+Chitrakoot,Uttar Pradesh,25.2051,81.0896,991730,97.0,56.7,92.0,81.1,63.8,census2011
+Deoria,Uttar Pradesh,26.4227,83.8366,3100946,99.8,69.1,95.3,93.4,69.0,census2011
+Etah,Uttar Pradesh,27.5121,78.7132,1774480,99.8,62.7,88.0,76.7,68.0,census2011
+Etawah,Uttar Pradesh,26.7593,79.0966,1581810,99.5,78.1,95.7,85.2,74.6,census2011
+Faizabad,Uttar Pradesh,26.6589,81.9924,2470996,100.0,64.4,90.3,89.1,71.1,census2011
+Farrukhabad,Uttar Pradesh,27.4304,79.4613,1885204,99.7,72.6,91.8,69.3,67.1,census2011
+Fatehpur,Uttar Pradesh,25.8733,80.807,2632733,98.8,63.1,76.8,81.4,63.4,census2011
+Firozabad,Uttar Pradesh,27.1806,78.5399,2498156,99.4,69.0,96.3,80.1,72.5,census2011
+Gautam Buddha Nagar,Uttar Pradesh,28.3979,77.5471,1648115,99.9,74.0,99.4,86.6,78.0,census2011
+Ghaziabad,Uttar Pradesh,28.7389,77.7067,4681645,99.1,84.5,99.9,86.4,78.9,census2011
+Ghazipur,Uttar Pradesh,25.6224,83.5562,3620268,99.3,64.1,91.8,88.3,69.7,census2011
+Gonda,Uttar Pradesh,27.0841,82.0256,3433919,100.0,44.6,88.9,81.8,61.7,census2011
+Gorakhpur,Uttar Pradesh,26.6578,83.3614,4440895,99.8,69.6,94.9,91.6,67.6,census2011
+Hamirpur,Uttar Pradesh,25.7316,79.8789,1104285,99.4,77.7,94.6,96.3,70.8,census2011
+Hapur,Uttar Pradesh,28.7167,77.8904,,99.9,85.6,98.8,83.3,71.8,created after 2011 (no Census 2011 population)
+Hardoi,Uttar Pradesh,27.3287,80.1625,4092845,99.9,55.7,71.0,73.9,64.6,census2011
+Jalaun,Uttar Pradesh,26.0912,79.3874,1689974,99.0,80.2,96.9,85.1,71.9,census2011
+Jaunpur,Uttar Pradesh,25.746,82.5759,4494204,99.1,62.6,98.2,88.8,69.9,census2011
+Jhansi,Uttar Pradesh,25.5054,78.954,1998603,96.8,73.2,95.2,92.9,71.1,census2011
+Jyotiba Phule Nagar,Uttar Pradesh,28.8135,78.3294,1840221,99.7,78.9,96.4,81.1,63.7,census2011
+Kannauj,Uttar Pradesh,27.012,79.6879,1656616,99.9,70.1,87.3,76.4,71.3,census2011
+Kanpur Dehat,Uttar Pradesh,26.4448,79.8571,1796184,99.4,70.6,79.8,84.3,73.9,census2011
+Kanpur Nagar,Uttar Pradesh,26.3805,80.2158,4581268,98.8,77.5,89.3,86.6,80.4,census2011
+Kanshiram Nagar,Uttar Pradesh,27.7772,78.8454,1436719,99.4,69.8,87.2,74.8,62.2,census2011
+Kaushambi,Uttar Pradesh,25.4887,81.4536,1599596,98.3,59.6,78.7,88.6,63.2,census2011
+Kheri,Uttar Pradesh,28.1225,80.667,4021243,99.9,65.6,84.2,82.8,66.3,census2011
+Kushinagar,Uttar Pradesh,26.8617,83.9349,3564544,100.0,73.1,91.5,89.4,63.7,census2011
+Lalitpur,Uttar Pradesh,24.6533,78.5619,1221592,96.6,64.2,94.1,90.8,66.8,census2011
+Lucknow,Uttar Pradesh,26.8416,80.9067,4589838,99.8,80.4,96.8,91.3,80.8,census2011
+Mahamaya Nagar,Uttar Pradesh,27.5776,78.1616,1564708,99.0,73.3,94.9,80.3,67.9,census2011
+Mahoba,Uttar Pradesh,25.3443,79.6966,875958,100.0,66.7,94.8,93.3,62.4,census2011
+Mahrajganj,Uttar Pradesh,27.2025,83.5333,2684703,94.3,69.0,95.9,96.3,65.2,census2011
+Mainpuri,Uttar Pradesh,27.1806,79.0591,1868529,99.6,63.1,95.2,82.7,74.6,census2011
+Mathura,Uttar Pradesh,27.5968,77.6276,2547184,98.4,71.2,98.2,79.5,68.4,census2011
+Mau,Uttar Pradesh,26.0431,83.5629,2205968,99.8,75.1,94.2,94.7,68.8,census2011
+Meerut,Uttar Pradesh,29.0357,77.7939,3443689,99.7,82.7,98.6,80.6,74.0,census2011
+Mirzapur,Uttar Pradesh,24.9854,82.6192,2496970,96.9,72.3,92.7,91.1,69.0,census2011
+Moradabad,Uttar Pradesh,28.7752,78.7085,4772006,99.8,79.0,96.0,80.3,67.6,census2011
+Muzaffarnagar,Uttar Pradesh,29.439,77.5923,4143512,99.9,80.1,97.8,87.0,69.1,census2011
+Pilibhit,Uttar Pradesh,28.5418,79.9617,2031007,100.0,76.8,86.8,76.2,60.1,census2011
+Pratapgarh,Uttar Pradesh,25.8726,81.8314,3209141,97.8,52.0,92.5,90.8,67.2,census2011
+Prayagraj,Uttar Pradesh,25.2989,81.9717,5954391,95.8,59.5,95.0,83.2,70.6,census2011
+Rae Bareli,Uttar Pradesh,26.2288,81.2314,3405559,98.1,55.0,88.9,89.5,66.4,census2011
+Rampur,Uttar Pradesh,28.7955,79.1055,2335819,100.0,79.0,96.2,81.0,57.6,census2011
+Saharanpur,Uttar Pradesh,29.9496,77.5477,3466382,99.7,83.8,98.3,81.7,69.3,census2011
+Sambhal,Uttar Pradesh,28.4272,78.5565,,100.0,72.8,91.9,74.2,56.0,created after 2011 (no Census 2011 population)
+Sant Kabir Nagar,Uttar Pradesh,26.7902,83.0348,1715183,99.9,65.1,94.0,90.6,63.8,census2011
+Sant Ravidas Nagar (Bhadohi),Uttar Pradesh,25.3481,82.4642,1578213,96.7,68.8,96.5,90.3,67.3,census2011
+Shahjahanpur,Uttar Pradesh,27.9757,79.8449,3006538,100.0,69.2,84.1,63.3,63.2,census2011
+Shamli,Uttar Pradesh,29.4812,77.2901,,99.9,83.3,98.7,78.3,62.7,created after 2011 (no Census 2011 population)
+Shrawasti,Uttar Pradesh,27.6547,81.884,1117361,99.3,58.1,73.7,80.4,47.0,census2011
+Siddharthnagar,Uttar Pradesh,27.2741,82.8734,2559297,99.9,42.8,90.7,69.7,57.7,census2011
+Sitapur,Uttar Pradesh,27.5177,80.8574,4483992,99.7,52.5,68.4,84.8,65.0,census2011
+Sonbhadra,Uttar Pradesh,24.4021,83.0535,1862559,89.6,70.6,82.9,76.8,62.1,census2011
+Sultanpur,Uttar Pradesh,26.2749,82.0201,3797117,99.5,65.1,94.3,87.0,68.9,census2011
+Unnao,Uttar Pradesh,26.6092,80.5594,3108367,98.5,60.3,75.4,80.8,69.0,census2011
+Varanasi,Uttar Pradesh,25.3881,82.9176,3676841,98.4,83.2,97.2,95.2,74.1,census2011
+Almora,Uttarakhand,29.6892,79.5019,622506,93.3,89.2,99.9,80.1,72.3,census2011
+Bageshwar,Uttarakhand,29.9911,79.8596,259898,92.0,88.5,99.8,82.0,73.9,census2011
+Chamoli,Uttarakhand,30.4953,79.5787,391605,94.4,87.6,99.5,73.9,79.1,census2011
+Champawat,Uttarakhand,29.2988,80.0697,259648,95.4,82.7,99.6,79.8,75.9,census2011
+Dehradun,Uttarakhand,30.4635,77.9732,1696694,99.0,83.9,99.7,91.7,82.9,census2011
+Hardwar,Uttarakhand,29.8718,78.0012,1890422,99.6,69.8,99.7,79.8,73.9,census2011
+Nainital,Uttarakhand,29.3127,79.4547,954605,93.0,82.4,99.1,81.2,80.3,census2011
+Pauri Garhwal,Uttarakhand,29.8929,78.7696,687271,83.5,83.3,99.4,76.0,75.5,census2011
+Pithoragarh,Uttarakhand,30.112,80.3477,483439,90.9,84.5,99.6,84.9,79.7,census2011
+Rudraprayag,Uttarakhand,30.5303,79.0589,242285,93.9,86.8,99.5,86.6,73.0,census2011
+Tehri Garhwal,Uttarakhand,30.4374,78.537,618931,84.1,84.6,99.9,82.2,62.2,census2011
+Udham Singh Nagar,Uttarakhand,29.0275,79.5235,1648902,99.9,70.9,99.6,85.1,70.5,census2011
+Uttarkashi,Uttarakhand,30.9731,78.6039,330086,96.1,75.7,99.6,85.9,69.0,census2011
+Bankura,West Bengal,23.141,87.135,3596674,96.3,49.2,92.3,93.3,68.7,census2011
+Birbhum,West Bengal,23.9536,87.6665,3502404,99.4,55.0,97.8,90.3,73.6,census2011
+Dakshin Dinajpur,West Bengal,25.364,88.5882,1676276,99.7,79.0,96.5,91.4,77.7,census2011
+Darjeeling,West Bengal,26.9135,88.3947,1846823,90.8,83.0,98.2,98.4,78.3,census2011
+Haora,West Bengal,22.526,88.0675,4850029,99.5,72.9,99.0,95.5,82.0,census2011
+Hugli,West Bengal,22.8847,88.0798,5519145,98.1,76.2,98.4,97.0,81.0,census2011
+Jalpaiguri,West Bengal,26.6605,89.0844,3872846,95.2,73.2,97.4,95.8,73.7,census2011
+Koch Bihar,West Bengal,26.2911,89.3436,2819086,99.3,75.7,98.2,93.0,75.7,census2011
+Kolkata,West Bengal,22.5553,88.3558,4496694,99.3,60.9,99.6,97.5,87.2,census2011
+Maldah,West Bengal,25.1367,88.0923,3988845,99.0,62.0,98.1,87.7,71.3,census2011
+Murshidabad,West Bengal,24.1612,88.2311,7103807,99.1,69.7,96.7,87.0,74.7,census2011
+Nadia,West Bengal,23.4827,88.5214,5167600,98.2,78.4,98.2,97.7,77.6,census2011
+North Twenty Four Parganas,West Bengal,22.465,88.7803,10009781,99.5,80.4,99.5,97.5,82.4,census2011
+Paschim Barddhaman,West Bengal,23.6462,87.1588,,95.2,71.5,97.0,89.8,74.8,created after 2011 (no Census 2011 population)
+Paschim Medinipur,West Bengal,22.4143,87.267,5913457,95.5,58.3,95.4,87.6,72.1,census2011
+Purba Barddhaman,West Bengal,23.4159,87.8298,,99.1,64.2,96.8,96.0,71.2,created after 2011 (no Census 2011 population)
+Purba Medinipur,West Bengal,22.0208,87.7744,5095875,87.8,69.8,99.0,91.5,83.0,census2011
+Puruliya,West Bengal,23.2774,86.4183,2930115,87.6,29.2,88.6,89.8,63.6,census2011
+South Twenty Four Parganas,West Bengal,22.116,88.4169,8161961,100.0,70.1,99.2,91.0,80.9,census2011
+Uttar Dinajpur,West Bengal,25.881,88.1582,3007134,99.8,63.8,96.9,76.9,68.1,census2011

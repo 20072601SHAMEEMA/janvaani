@@ -1,7 +1,8 @@
-"""SQLite storage + demo seed.
+"""SQLite storage and sample data.
 
-SQLite keeps the prototype a single container. The schema maps 1:1 onto
-BigQuery tables for national scale (see docs/ARCHITECTURE.md).
+districts  - real data: NFHS-5 indicators + Census 2011 population (built by data/build_districts.py)
+requests   - citizen requests. Live submissions are real; the starting set is clearly marked sample data
+             (ai_mode = 'sample') because real individual complaints are private and not published.
 """
 import csv
 import hashlib
@@ -11,6 +12,7 @@ import os
 import random
 import sqlite3
 import uuid
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -19,16 +21,12 @@ from .lang import CATEGORIES, STATE_LANGUAGE, TEMPLATES
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = Path(os.environ.get("DB_PATH", ROOT / "data" / "janvaani.db"))
 SALT = os.environ.get("CITIZEN_SALT", "janvaani-demo-salt")
+INDICATOR_CATS = [c for c, v in CATEGORIES.items() if v[2]]  # categories with a real NFHS-5 indicator
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS districts (
-    district TEXT PRIMARY KEY, state TEXT, lat REAL, lon REAL, population INTEGER,
-    aspirational INTEGER, water REAL, roads REAL, health REAL, education REAL,
-    power REAL, sanitation REAL, digital REAL
-);
-CREATE TABLE IF NOT EXISTS investments (
-    district TEXT, category TEXT, scheme TEXT, sanctioned_cr REAL,
-    PRIMARY KEY (district, category)
+    district TEXT PRIMARY KEY, state TEXT, lat REAL, lon REAL, population_2011 INTEGER,
+    water REAL, sanitation REAL, power REAL, health REAL, education REAL, note TEXT
 );
 CREATE TABLE IF NOT EXISTS requests (
     id TEXT PRIMARY KEY, created_at TEXT, channel TEXT, citizen_hash TEXT,
@@ -41,18 +39,6 @@ CREATE INDEX IF NOT EXISTS idx_req_dc ON requests (district, category);
 CREATE INDEX IF NOT EXISTS idx_req_state ON requests (state);
 CREATE TABLE IF NOT EXISTS briefs (key TEXT PRIMARY KEY, text TEXT, created_at TEXT);
 """
-
-SCHEMES = {c: v[2] for c, v in CATEGORIES.items()}
-# Illustrative sanctioned investment, INR crore per lakh population
-BASE_RATE = {"water": 6.0, "roads": 8.0, "health": 4.0, "education": 3.5, "power": 5.0,
-             "sanitation": 2.5, "digital": 1.5}
-
-# Planted demand spikes so the demo shows clear, recent hotspots
-SPIKES = {("Araria", "water"): 45, ("Malkangiri", "roads"): 40, ("Barmer", "water"): 40,
-          ("Bahraich", "health"): 38, ("Kupwara", "digital"): 25, ("Chennai", "sanitation"): 30,
-          ("Bengaluru Urban", "roads"): 30, ("Pashchimi Singhbhum", "health"): 28,
-          ("Dhubri", "roads"): 26, ("Nandurbar", "health"): 24, ("Raichur", "water"): 22,
-          ("Gadchiroli", "digital"): 20}
 
 
 def connect(readonly: bool = False) -> sqlite3.Connection:
@@ -72,81 +58,89 @@ def new_ticket() -> str:
     return "JV-" + uuid.uuid4().hex[:8].upper()
 
 
-def init_db(force_seed: bool = False):
+def init_db():
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     conn = connect()
     conn.executescript(SCHEMA)
-    has_rows = conn.execute("SELECT COUNT(*) FROM districts").fetchone()[0]
-    if force_seed or not has_rows:
-        _seed(conn)
+    if not conn.execute("SELECT COUNT(*) FROM districts").fetchone()[0]:
+        load_districts(conn)
+        add_sample_requests(conn)
     conn.close()
 
 
-def _seed(conn, seed: int = 42):
-    rng = random.Random(seed)
-    conn.execute("DELETE FROM districts")
-    conn.execute("DELETE FROM investments")
-    conn.execute("DELETE FROM requests")
-    conn.execute("DELETE FROM briefs")
-
+def load_districts(conn):
     with open(ROOT / "data" / "districts.csv", encoding="utf-8") as f:
-        districts = list(csv.DictReader(f))
+        rows = list(csv.DictReader(f))
+    # Some names exist in two states (e.g. Aurangabad). Add the state so every district is unique.
+    repeated = {n for n, k in Counter(r["district"] for r in rows).items() if k > 1}
+    for r in rows:
+        if r["district"] in repeated:
+            r["district"] = f"{r['district']} ({r['state']})"
+        r["population_2011"] = int(r["population_2011"]) if r["population_2011"] else None
     conn.executemany(
-        "INSERT INTO districts VALUES (:district,:state,:lat,:lon,:population,:aspirational,"
-        ":water,:roads,:health,:education,:power,:sanitation,:digital)", districts)
+        "INSERT INTO districts VALUES (:district,:state,:lat,:lon,:population_2011,"
+        ":water,:sanitation,:power,:health,:education,:note)", rows)
+    conn.commit()
 
-    for d in districts:
-        lakh = int(d["population"]) / 1e5
-        for cat in CATEGORIES:
-            # Better-served districts tend to have more sanctioned spend already
-            coverage = float(d[CATEGORIES[cat][1]]) / 100
-            amount = lakh * BASE_RATE[cat] * (0.4 + coverage) * rng.uniform(0.6, 1.4)
-            conn.execute("INSERT INTO investments VALUES (?,?,?,?)",
-                         (d["district"], cat, SCHEMES[cat], round(amount, 1)))
 
+def add_sample_requests(conn, seed: int = 42):
+    """Sample citizen requests so the dashboard is not empty on day one.
+
+    How they are made (so it can be explained honestly):
+      - every district gets a few requests, more for bigger populations;
+      - the category of each request follows that district's REAL NFHS-5 gaps
+        (a district with 30% sanitation gets many more sanitation requests than one with 95%);
+      - in each sector, the 2 districts with the largest real gap x population get a recent surge,
+        so the demo shows emerging hotspots that the real data supports;
+      - the text comes from sample sentences in 12 Indian languages (app/lang.py).
+    """
+    rng = random.Random(seed)
+    districts = [dict(r) for r in conn.execute("SELECT * FROM districts")]
     now = datetime.now(timezone.utc)
-    citizens = [citizen_hash(f"+91{rng.randint(6000000000, 9999999999)}") for _ in range(1400)]
+    citizens = [citizen_hash(f"sample-citizen-{i}") for i in range(4000)]
     rows = []
 
+    def gap(d, cat):
+        return (100 - d[cat]) if CATEGORIES[cat][2] else 25  # roads/digital: no official indicator
+
     def make(d, cat, recent=False):
-        variants = TEMPLATES[cat]
         state_lang = STATE_LANGUAGE.get(d["state"], "hi")
         r = rng.random()
-        lang = state_lang if r < 0.68 else ("hi" if r < 0.84 else "en")
-        pool = [v for v in variants if lang in v["texts"]] or variants
-        # urban districts lean on the second (urban) variant
-        urban = float(d["digital"]) > 70
-        v = pool[-1] if (urban and len(pool) > 1 and rng.random() < 0.6) else pool[0]
+        lang = state_lang if r < 0.7 else ("hi" if r < 0.85 else "en")
+        pool = [v for v in TEMPLATES[cat] if lang in v["texts"]] or TEMPLATES[cat]
+        v = rng.choice(pool)
         if lang not in v["texts"]:
             lang = "en"
-        block = rng.randint(1, 6)
-        age = rng.uniform(0, 14) if recent else rng.expovariate(1 / 35)
-        age = min(age, 120)
-        created = now - timedelta(days=age, minutes=rng.randint(0, 1440))
+        block = rng.randint(1, 5)
+        age = rng.uniform(0, 14) if recent else min(rng.expovariate(1 / 40), 120)
         urgency = max(1, min(5, v["urgency"] + rng.choice([-1, 0, 0, 0, 1])))
-        idx = TEMPLATES[cat].index(v)
         rows.append((
-            new_ticket(), created.isoformat(timespec="seconds"),
+            new_ticket(), (now - timedelta(days=age, minutes=rng.randint(0, 1440))).isoformat(timespec="seconds"),
             rng.choices(["web", "voice", "whatsapp", "telegram", "sms"], [30, 25, 25, 10, 10])[0],
             rng.choice(citizens), v["texts"][lang], lang, v["en"], cat, urgency, v["summary"],
             f"Block {block}, {d['district']}", d["state"], d["district"],
-            float(d["lat"]) + rng.uniform(-0.25, 0.25), float(d["lon"]) + rng.uniform(-0.25, 0.25),
+            d["lat"] + rng.uniform(-0.12, 0.12), d["lon"] + rng.uniform(-0.12, 0.12),
             "negative" if urgency >= 4 else "concerned", 0, None,
             rng.choices(["received", "under_review", "forwarded", "resolved"], [50, 25, 15, 10])[0],
-            f"{d['district']}|{cat}|{idx}|{block}", None, "seed",
+            f"{d['district']}|{cat}|{TEMPLATES[cat].index(v)}|{block}", None, "sample",
         ))
 
+    cats = list(CATEGORIES)
     for d in districts:
-        pop = int(d["population"])
-        n = int(8 + 7 * math.sqrt(pop / 1e6) * rng.uniform(0.7, 1.3))
-        gaps = {c: (100 - float(d[CATEGORIES[c][1]])) ** 1.6 + 5 for c in CATEGORIES}
-        cats = list(gaps)
+        pop = d["population_2011"] or 1_000_000
+        n = max(2, int(2 + 3 * math.sqrt(pop / 1e6) * rng.uniform(0.6, 1.4)))
+        weights = [gap(d, c) ** 1.5 + 3 for c in cats]
         for _ in range(n):
-            make(d, rng.choices(cats, [gaps[c] for c in cats])[0])
-    by_name = {d["district"]: d for d in districts}
-    for (dist, cat), n in SPIKES.items():
-        for _ in range(n):
-            make(by_name[dist], cat, recent=True)
+            make(d, rng.choices(cats, weights)[0])
+
+    # Recent surges where the real data shows the largest need
+    used = set()
+    for cat in INDICATOR_CATS:
+        worst = sorted(districts, key=lambda d: gap(d, cat) * math.sqrt(d["population_2011"] or 0), reverse=True)
+        for d in [d for d in worst if d["district"] not in used][:2]:
+            used.add(d["district"])
+            for _ in range(rng.randint(18, 32)):
+                make(d, cat, recent=True)
 
     conn.executemany(f"INSERT INTO requests VALUES ({','.join('?' * 22)})", rows)
     conn.commit()

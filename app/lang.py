@@ -23,22 +23,24 @@ LANGUAGES = {
 }
 
 STATE_LANGUAGE = {
-    "Andhra Pradesh": "te", "Telangana": "te", "Tamil Nadu": "ta", "Karnataka": "kn",
-    "Kerala": "ml", "Maharashtra": "mr", "Gujarat": "gu", "Rajasthan": "hi",
-    "Uttar Pradesh": "hi", "Bihar": "hi", "West Bengal": "bn", "Odisha": "or",
-    "Jharkhand": "hi", "Madhya Pradesh": "hi", "Chhattisgarh": "hi", "Assam": "as",
-    "Punjab": "pa", "Jammu and Kashmir": "hi", "Meghalaya": "en", "Himachal Pradesh": "hi",
+    "Andhra Pradesh": "te", "Telangana": "te", "Tamil Nadu": "ta", "Puducherry": "ta", "Karnataka": "kn",
+    "Kerala": "ml", "Maharashtra": "mr", "Goa": "mr", "Gujarat": "gu",
+    "Dadra and Nagar Haveli and Daman and Diu": "gu", "West Bengal": "bn", "Tripura": "bn", "Odisha": "or",
+    "Assam": "as", "Punjab": "pa", "Rajasthan": "hi", "Uttar Pradesh": "hi", "Bihar": "hi", "Jharkhand": "hi",
+    "Madhya Pradesh": "hi", "Chhattisgarh": "hi", "Haryana": "hi", "Delhi": "hi", "Uttarakhand": "hi",
+    "Himachal Pradesh": "hi", "Jammu and Kashmir": "ur", "Ladakh": "hi", "Andaman and Nicobar Islands": "hi",
+    "Arunachal Pradesh": "en", "Meghalaya": "en", "Mizoram": "en", "Nagaland": "en", "Manipur": "en", "Sikkim": "en",
 }
 
-# category -> (label, indicator column in districts table, flagship scheme)
+# category -> (label, flagship scheme, real NFHS-5 indicator used to measure the gap or None)
 CATEGORIES = {
-    "water": ("Drinking water", "water", "Jal Jeevan Mission"),
-    "roads": ("Roads & connectivity", "roads", "PMGSY"),
-    "health": ("Health facilities", "health", "National Health Mission"),
-    "education": ("Schools & education", "education", "Samagra Shiksha"),
-    "power": ("Electricity", "power", "RDSS"),
-    "sanitation": ("Sanitation & waste", "sanitation", "Swachh Bharat Mission"),
-    "digital": ("Digital connectivity", "digital", "BharatNet"),
+    "water": ("Drinking water", "Jal Jeevan Mission", "Population with an improved drinking-water source"),
+    "sanitation": ("Sanitation & waste", "Swachh Bharat Mission", "Population using an improved sanitation facility"),
+    "power": ("Electricity", "RDSS / Saubhagya", "Population living in households with electricity"),
+    "health": ("Health facilities", "National Health Mission", "Institutional births"),
+    "education": ("Schools & education", "Samagra Shiksha", "Females age 6+ who ever attended school"),
+    "roads": ("Roads & connectivity", "PMGSY", None),
+    "digital": ("Digital connectivity", "BharatNet", None),
 }
 
 # Each variant: English meaning + the same request in several languages.
