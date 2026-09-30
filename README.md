@@ -8,6 +8,10 @@ for all 705 districts of India and shows planners a ranked list of projects, wit
 
 Built for *Build with AI: Code for Communities (2nd Edition)*, AI & Governance track.
 
+**Live app:** https://janvaani-npik.onrender.com (dashboard) · https://janvaani-npik.onrender.com/submit (citizen portal)
+
+The app is on a free hosting plan, so the first visit after a quiet period can take about a minute to load.
+
 ## What you can do with it
 
 **Citizen portal** (`/submit`)

@@ -10,8 +10,8 @@ districts, and gives planners a hotspot map, a ranked list of projects with clea
 - Sample: the starting citizen requests (real complaints are private). They are tagged "sample"; requests submitted in the app are tagged "live".
 
 ## Checklist
-- [ ] Source code: public GitHub repo
-- [ ] Deployed link: Cloud Run URL
+- [x] Source code: https://github.com/20072601SHAMEEMA/janvaani
+- [x] Deployed link: https://janvaani-npik.onrender.com
 - [ ] Demo video, 3–5 min (docs/DEMO_SCRIPT.md)
 - [ ] Pitch deck, 10–12 slides (docs/PITCH_DECK.md)
 - [ ] Brief description (above)
