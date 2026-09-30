@@ -43,6 +43,6 @@ function setAiBadge(mode) {
   const b = document.getElementById("aiBadge");
   if (!b) return;
   b.classList.toggle("live", mode === "gemini");
-  b.lastElementChild.textContent = mode === "gemini" ? "Gemini live" : "Offline demo mode";
-  b.title = mode === "gemini" ? "Requests are analysed by Google Gemini" : "Set GEMINI_API_KEY to enable Gemini";
+  b.lastElementChild.textContent = mode === "gemini" ? "Gemini live" : "Basic mode";
+  b.title = mode === "gemini" ? "Requests are analysed by Google Gemini" : "Gemini is not connected; using basic keyword analysis";
 }

@@ -9,6 +9,7 @@ import urllib.request
 from datetime import datetime, timedelta, timezone
 
 from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.concurrency import run_in_threadpool
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -242,7 +243,7 @@ def ingest(text: str = "", audio: bytes | None = None, audio_mime: str = "audio/
            contact: str = "", state: str = "", district: str = "",
            lat: float | None = None, lon: float | None = None) -> dict:
     a = ai.analyse(text, audio, audio_mime, image, image_mime, state, district)
-    if not a.get("is_development_request") and not text and not audio:
+    if not a.get("is_development_request") and not text and not audio and not image:
         raise HTTPException(400, "Empty request")
     rid = db.new_ticket()
     d = _resolve_district(district, state, a, lat, lon)
@@ -282,13 +283,15 @@ async def create_request(text: str = Form(""), state: str = Form(""), district: 
     photo_b = await photo.read() if photo else None
     if (audio_b and len(audio_b) > MAX_UPLOAD) or (photo_b and len(photo_b) > MAX_UPLOAD):
         raise HTTPException(413, "File too large (8 MB max)")
-    if not text.strip() and not audio_b:
-        raise HTTPException(400, "Please type a message or record a voice note")
-    return ingest(text=text.strip(), audio=audio_b or None,
-                  audio_mime=(audio.content_type if audio else None) or "audio/wav",
-                  image=photo_b or None, image_mime=(photo.content_type if photo else None) or "image/jpeg",
-                  channel=channel if channel in {"web", "voice", "whatsapp", "telegram", "sms"} else "web",
-                  contact=contact, state=state, district=district, lat=lat, lon=lon)
+    if not text.strip() and not audio_b and not photo_b:
+        raise HTTPException(400, "Please type a message, record a voice note or add a photo")
+    # Gemini calls take seconds; run them off the main loop so other users are not blocked
+    return await run_in_threadpool(
+        ingest, text=text.strip(), audio=audio_b or None,
+        audio_mime=(audio.content_type if audio else None) or "audio/wav",
+        image=photo_b or None, image_mime=(photo.content_type if photo else None) or "image/jpeg",
+        channel=channel if channel in {"web", "voice", "whatsapp", "telegram", "sms"} else "web",
+        contact=contact, state=state, district=district, lat=lat, lon=lon)
 
 
 # ------------------------------------------------------------------ ask the data
@@ -371,8 +374,8 @@ async def telegram(secret: str, request: Request):
     text = msg.get("text") or msg.get("caption") or ""
     if not text and not audio:
         return {"ok": True}
-    res = ingest(text=text, audio=audio, audio_mime="audio/ogg", channel="telegram",
-                 contact=f"tg:{msg.get('from', {}).get('id', chat)}", lat=loc.get("latitude"), lon=loc.get("longitude"))
+    res = await run_in_threadpool(ingest, text=text, audio=audio, audio_mime="audio/ogg", channel="telegram",
+                                  contact=f"tg:{msg.get('from', {}).get('id', chat)}", lat=loc.get("latitude"), lon=loc.get("longitude"))
     _tg("sendMessage", {"chat_id": chat, "text": f"{res['acknowledgement']}\n\n📍 {res['district'] or 'Location pending'}"
                                                  f" · {CATEGORIES.get(res['category'], ('Other',))[0]}"
                                                  f" · {res['similar_reports']} similar report(s)"})

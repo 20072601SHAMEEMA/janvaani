@@ -8,6 +8,7 @@ Gemini does four jobs:
   4. policy_brief() evidence pack -> short, cited recommendation note for a ministry
 """
 import enum
+import time
 import json
 import os
 import re
@@ -27,7 +28,10 @@ if API_KEY:
         from google.genai import types
         # Set GOOGLE_GENAI_USE_VERTEXAI=true to route through Vertex AI instead of the Gemini Developer API
         use_vertex = os.environ.get("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true")
-        _client = genai.Client(vertexai=True, api_key=API_KEY) if use_vertex else genai.Client(api_key=API_KEY)
+        # Keep citizens waiting seconds, not minutes: 25 s per call and one quick retry, then the next model
+        http = types.HttpOptions(timeout=25_000, retry_options=types.HttpRetryOptions(
+            attempts=2, initial_delay=1.0, max_delay=2.0))
+        _client = genai.Client(vertexai=use_vertex, api_key=API_KEY, http_options=http)
     except Exception as e:  # pragma: no cover
         print("Gemini client unavailable, using offline mode:", e)
 
@@ -43,9 +47,14 @@ FALLBACK_MODELS = [m for m in os.environ.get(
     "GEMINI_FALLBACK_MODELS", "gemini-3.5-flash,gemini-flash-latest,gemini-3.1-flash-lite").split(",") if m]
 
 
+TOTAL_BUDGET_S = 60  # stop trying more models after this, and use the offline fallback
+
+
 def _generate(contents, config):
-    last = None
+    last, start = None, time.monotonic()
     for model in dict.fromkeys([MODEL, *FALLBACK_MODELS]):
+        if last is not None and time.monotonic() - start > TOTAL_BUDGET_S:
+            break
         try:
             return _client.models.generate_content(model=model, contents=contents, config=config)
         except Exception as e:
@@ -135,7 +144,8 @@ def _analyse_gemini(text, audio, audio_mime, image, image_mime, state_hint, dist
 def _analyse_offline(text: str, had_audio: bool, had_image: bool) -> dict:
     text = (text or "").strip()
     if not text:
-        text = "(voice note received — transcription needs a Gemini API key)" if had_audio else ""
+        text = ("(voice note received — transcription needs a Gemini API key)" if had_audio
+                else "(photo received — an officer will review it)" if had_image else "")
     lang = detect_language(text)
     tpl = _TEMPLATES.get(text)
     if tpl:
@@ -282,7 +292,7 @@ def _brief_offline(ev: dict) -> str:
     if p["coverage_pct"] is not None:
         gap_line = f"- NFHS-5: only {p['coverage_pct']:.0f}% coverage ({p['indicator'].lower()})."
     else:
-        gap_line = "- No official district indicator for this sector yet; ranked on citizen demand and population."
+        gap_line = "- No official district indicator for this sector yet, so no gap points; ranked on citizen demand and population."
     reach = (f"~{p['people_without']:,} people without this service (Census 2011 population x NFHS-5 gap)."
              if p["people_without"] else "Population figure not available (district created after 2011).")
     return (

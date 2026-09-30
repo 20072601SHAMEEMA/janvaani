@@ -64,8 +64,8 @@ score = 50% Citizen demand + 35% Gap (NFHS-5) + 15% Population (Census 2011)
 - **Gap**: 100 minus the district's NFHS-5 coverage for that sector (e.g. 37% sanitation → gap of 63).
 - **Population**: bigger districts benefit more people.
 
-Roads and digital connectivity have no NFHS-5 district figure, so for those two sectors the score uses demand and
-population only, and the app shows "no official indicator".
+Roads and digital connectivity have no NFHS-5 district figure, so those two sectors get no gap points (they can still
+rank high if many people ask for them), and the app shows "no official indicator".
 
 ## Run it on your computer
 

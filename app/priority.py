@@ -4,7 +4,7 @@ score = 100 x (0.50 x Demand + 0.35 x Gap + 0.15 x Reach)
 
   Demand  citizen requests, weighted by urgency (1-5) and how recent they are
   Gap     100 - the district's real NFHS-5 coverage for that sector
-          (roads and digital have no NFHS-5 indicator, so their score uses Demand and Reach only)
+          (roads and digital have no NFHS-5 indicator, so they get no gap points)
   Reach   Census 2011 population (log scale); districts created after 2011 get the median
 
 Every part is returned with the score so anyone can check why a project ranks where it does.
@@ -25,7 +25,8 @@ def compute(weights: dict | None = None, state: str | None = None, category: str
     w = {**DEFAULT_WEIGHTS, **(weights or {})}
 
     districts = {d["district"]: d for d in db.rows("SELECT * FROM districts")}
-    requests = db.rows("SELECT district, category, urgency, created_at, citizen_hash, cluster_id FROM requests")
+    requests = db.rows("SELECT district, category, urgency, created_at, citizen_hash, cluster_id FROM requests "
+                       "WHERE status != 'needs_review'")  # spam / unclear messages never add to demand
     now = datetime.now(timezone.utc)
 
     groups = {}
@@ -62,9 +63,9 @@ def compute(weights: dict | None = None, state: str | None = None, category: str
             "gap": (100 - coverage) / 100 if coverage is not None else None,
             "reach": ((math.log(d["population_2011"]) if d["population_2011"] else median) - lo) / (hi - lo),
         }
-        used = {k: w[k] for k, v in parts.items() if v is not None}
-        total_w = sum(used.values()) or 1
-        contributions = {k: round(100 * used[k] / total_w * parts[k], 1) for k in used}
+        # A sector without an official indicator (roads, digital) simply gets no gap points
+        total_w = sum(w.values()) or 1
+        contributions = {k: round(100 * w[k] / total_w * v, 1) for k, v in parts.items() if v is not None}
         out.append({
             "district": name, "state": d["state"], "category": cat,
             "category_label": CATEGORIES[cat][0], "scheme": CATEGORIES[cat][1], "indicator": CATEGORIES[cat][2],

@@ -56,7 +56,7 @@ flowchart LR
 | Gap (35%) | (100 − coverage %) / 100 | NFHS-5 (2019–21) district fact sheets |
 | Population (15%) | min–max of ln(population) | Census 2011 |
 
-Sectors with no NFHS-5 district indicator (roads, digital) use demand and population only, re-weighted.
+Sectors with no NFHS-5 district indicator (roads, digital) get no gap points; demand and population still count.
 Every recommendation shows its parts, and the weights are sliders on the dashboard.
 **Emerging** flag: at least 10 requests in the last 14 days and at least 2× the previous 14 days.
 

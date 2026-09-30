@@ -94,7 +94,7 @@ async function submit(e) {
   e.preventDefault();
   $("err").textContent = "";
   const text = $("text").value.trim();
-  if (!text && !audioBlob) return ($("err").textContent = "Please record a voice note or type your request.");
+  if (!text && !audioBlob && !$("photo").files[0]) return ($("err").textContent = "Please speak, type or add a photo of the problem.");
   const fd = new FormData();
   fd.append("text", text);
   fd.append("state", $("state").value); fd.append("district", $("district").value);
@@ -141,7 +141,7 @@ function showResult(r) {
         <div>Location</div><div>${esc(r.district ? `${r.district}, ${r.state}` : "Pending — an officer will confirm")}</div>
         ${r.photo_note ? `<div>Photo</div><div>${esc(r.photo_note)}</div>` : ""}
         <div>Community signal</div><div>${r.similar_reports > 1 ? `<b>${r.similar_reports} citizens</b> have reported this same issue — your voice strengthens its priority.` : "First report of this issue in your area."}</div>
-        <div>Analysed by</div><div>${r.ai_mode === "gemini" ? "✦ Google Gemini" : "Offline analyser (demo)"}</div>
+        <div>Analysed by</div><div>${r.ai_mode === "gemini" ? "✦ Google Gemini" : "Basic keyword analysis (Gemini unavailable)"}</div>
       </div>
     </div>`;
   $("speakBtn").onclick = () => speak(r.acknowledgement, r.bcp47);
