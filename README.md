@@ -1,4 +1,4 @@
-# JanVaani (जनवाणी): Voice of the People
+# JanVaani: Voice of the People
 
 JanVaani helps government planners decide **where development money is needed most**.
 

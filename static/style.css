@@ -16,7 +16,7 @@ h2 { font-size: 15px; font-weight: 650; }
 
 header.top { background: var(--brand); color: #fff; padding: 12px 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .logo { display: flex; align-items: center; gap: 10px; }
-.logo .mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), #f5b041); display: grid; place-items: center; font-weight: 800; }
+.logo .mark { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--accent), #f5b041); display: grid; place-items: center; font-weight: 800; font-size: 13px; letter-spacing: .02em; }
 .logo h1 { font-size: 19px; }
 .logo p { margin: 0; font-size: 12px; opacity: .8; }
 header .spacer { flex: 1; }

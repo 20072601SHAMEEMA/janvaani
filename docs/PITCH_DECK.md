@@ -1,7 +1,7 @@
 # JanVaani: Pitch deck (12 slides)
 
 **1. Title**
-JanVaani (जनवाणी), Voice of the People. *Every citizen's voice, in every language, on one national priority map.*
+JanVaani, Voice of the People. *Every citizen's voice, in every language, on one national priority map.*
 AI & Governance track · [Your name] · [Live link] · [GitHub link]
 
 **2. The problem**
