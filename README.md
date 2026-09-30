@@ -81,8 +81,16 @@ Open http://localhost:8000 (dashboard) and http://localhost:8000/submit (citizen
 In Google Cloud Shell:
 ```bash
 git clone https://github.com/<your-username>/janvaani.git && cd janvaani
-gcloud run deploy janvaani --source . --region asia-south1 --allow-unauthenticated --set-env-vars GEMINI_API_KEY=<your-key>
+gcloud run deploy janvaani --source . --region asia-south1 --allow-unauthenticated --max-instances 1 --set-env-vars GEMINI_API_KEY=<your-key>
 ```
+`--max-instances 1` keeps all submissions in one place for the prototype (it uses a simple SQLite file).
+For a real pilot, the data would move to Firestore/BigQuery so it can scale.
+
+## Beyond India (BRICS)
+
+Nothing in the app is India-only except the data files. Another country can use it by providing its own district table
+(coverage indicators + population), its language list and its scheme names. Gemini already understands Portuguese,
+Russian, Chinese and the South African languages, so the citizen side works as-is.
 
 ## Privacy and safety
 

@@ -52,7 +52,8 @@ Channels (web, voice, Telegram) → Cloud Run (FastAPI) → Gemini → database 
 - Privacy: no phone numbers stored, and the question feature can only read data.
 
 **12. Next steps and ask**
-WhatsApp + phone (IVR) channels · more government datasets · integration with grievance portals.
+WhatsApp + phone (IVR) channels · more government datasets · integration with grievance portals ·
+same design for other BRICS countries (swap the district data, languages and schemes).
 Ask: one pilot district cluster with a state planning department.
 
 **Be clear about data in the talk:** coverage and population are real; the starting requests are sample data because
